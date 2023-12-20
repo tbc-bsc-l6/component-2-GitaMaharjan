@@ -1,41 +1,16 @@
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import RootLayout from "./pages/Root";
+import RootLayout from "./pages/Customer/Root";
 import ErrorPage from "./pages/ErrorPage";
-import AboutUsPage from "./pages/AboutUsPage";
+import AboutUsPage from "./pages/Customer/AboutUsPage";
 
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/Customer/LoginPage";
 import SignUpForm from "./components/Login/SignUpForm";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <RootLayout />,
-//     errorElement: <ErrorPage />,
-//     children: [
-//       {
-//         path: "aboutus",
-//         element: <AboutUsPage />,
-//       },
-//       {
-//         path: "login",
-//         element: <LoginPage />,
-//         children: [
-//           {
-//             path: "signup",
-//             element: <SignUpForm />,
-//           },
-//         ],
-//       },
-//     ],
-//   },
-// ]);
+import Home from "./pages/Customer/Home";
 
 function App() {
   return (
-    // return <RouterProvider router={router} />;
     <Router>
       <Routes>
         <Route path="/" element={<RootLayout />}>

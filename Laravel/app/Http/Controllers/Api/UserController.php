@@ -27,12 +27,7 @@ class UserController extends Controller
         $name=$request->name;
         $email=$request->email;
         $password=$request->password;
-        
-    
-        // $result=User::where(["email"=>$email])->first();
-        // return response([
-        //     "result"=>$result
-        // ]);
+
 
         if(User::where(["email"=>$email])->first()){
             
@@ -55,6 +50,26 @@ class UserController extends Controller
            }
         }
        
+    }
+
+    public function authentication(Request $request){
+        $tokenTable = Tokenall::where('token_id', $request->token)->first();
+        
+        if($tokenTable != null){
+            $user = Tokenall::find($tokenTable->id)->user->toArray();
+            return response([
+                'name' => $user['name'],
+                'email'=> $user['email'],
+                'status'=>"true",
+                'image'=> 'p1.jpg',
+                'type'=> $user['usertype']
+            ]);
+        }
+        else{
+            return response([
+                'status'=>"false"
+            ]);
+        }
     }
 
     

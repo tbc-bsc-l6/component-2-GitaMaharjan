@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-import Header from "../components/Layout/Header/header";
-import Footer from "../components/Layout/Footer/footer";
+import Header from "../../components/Layout/Header/header";
+import Footer from "../../components/Layout/Footer/footer";
 
 function RootLayout() {
   // const navigation = useNavigation();
