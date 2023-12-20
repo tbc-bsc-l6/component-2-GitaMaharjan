@@ -1,0 +1,61 @@
+/* MultiColumnDropdown.css */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  max-height: 70vh; /* Adjust the max height as a percentage of viewport height */
+  overflow-y: auto;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-row {
+  display: flex;
+  gap: 10px; /* Add space between columns */
+}
+
+.dropdown-column {
+  flex: 1;
+}
+
+/* Add this CSS to your header.css file or style section */
+.dropdown-item {
+  margin: 12px; /* Adjust the margin value as needed to control the space between items */
+  padding: 16px; /* Adjust the padding to increase the size of each item */
+  text-align: center;
+  width: 150px; /* Adjust the width of each item as needed */
+  background-color: #ffffff; /* Optional: Add background color */
+  border: 1px solid #e2e8f0; /* Optional: Add border */
+  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+  transition: background-color 0.3s ease; /* Add transition for smooth color change */
+}
+
+/* Hover effect */
+.dropdown-item:hover {
+  background-color: #f5f7fd; /* Change color on hover */
+}
+
+/* Additional styling if desired */
+.dropdown-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%; /* Optional: Add border-radius for rounded image */
+}
+
+.dropdown-item p {
+  margin-top: 8px;
+  font-size: 14px; /* Optional: Adjust the font size of the paragraph */
+  color: #333333; /* Optional: Set text color */
+}

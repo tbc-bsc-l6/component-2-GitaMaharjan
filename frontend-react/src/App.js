@@ -4,6 +4,9 @@ import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import AboutUsPage from "./pages/AboutUsPage";
+import SignInForm from "./components/Login/SignInForm";
+import SignUpForm from "./components/Login/SIgnUpForm";
+import LoginPage from "./pages/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +21,20 @@ const router = createBrowserRouter([
       {
         path: "/aboutus",
         element: <AboutUsPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+        children: [
+          {
+            path: "/login/signin",
+            element: <SignInForm />,
+          },
+          {
+            path: "/login/signup",
+            element: <SignUpForm />,
+          },
+        ],
       },
     ],
   },
