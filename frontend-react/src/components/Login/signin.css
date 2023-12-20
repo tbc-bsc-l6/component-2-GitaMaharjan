@@ -1,17 +1,20 @@
-.App {
+.app {
   display: flex;
-  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120vh;
 }
 
-.appAside {
+/* .appAside {
   flex: 1;
-  background: #f0f0f0; /* Add your desired background color */
+  background: #ececec;
   padding: 20px;
   text-align: center;
 }
 
 .logo {
-  width: 80px; /* Adjust the width according to your logo size */
+  width: 80px;
 }
 
 .asideText {
@@ -20,22 +23,23 @@
 }
 
   
-  .appForm {
-    width: 50%;
-    background-color: #12130f;
-    padding: 25px 40px;
-    overflow: auto;
-  }
+.appForm {
+  width: 50%;
+  background-color: #f5f5f5; 
+  padding: 50px; 
+
+} */
   
-  .pageSwitcher {
+  /* .pageSwitcher {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 10%;
   }
   
-  .pageSwitcherItem {
-    background-color: #40434e;
-    color: #9da6b1;
+  .pageSwitcherItem,
+  .pageSwitcherItem-active {
+    background-color:  #fc936a;
+    color: #333; 
     padding: 10px 25px;
     cursor: pointer;
     font-size: 0.9em;
@@ -46,8 +50,8 @@
   }
   
   .pageSwitcherItem-active {
-    background-color: #6b5b95;
-    color: white;
+    background-color: #ece4de;
+    color: rgb(41, 29, 29);
   }
   
   .pageSwitcherItem:first-child {
@@ -57,10 +61,14 @@
   .pageSwitcherItem:last-child {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
-  }
+  } */
   
   .formCenter {
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
+    height: 70vh;
+    width: 80vh;
+    background-color: antiquewhite;
+    border-radius: 15px;
   }
   
   .formTitle {
@@ -83,7 +91,7 @@
   }
   
   .formTitleLink-active {
-    color: white;
+    color: rgb(117, 97, 97);
     border-bottom: 1px solid #6b5b95;
   }
   
@@ -95,13 +103,13 @@
     display: block;
     text-transform: uppercase;
     font-size: 0.9em;
-    color: white;
+    color: rgb(88, 73, 73);
   }
   .formFieldInput {
     width: 85%;
     background-color: transparent;
     border: none;
-    color: white;
+    color: rgb(90, 72, 72);
     outline: none;
     border-bottom: 1px solid #445366;
     font-size: 1em;
@@ -115,8 +123,8 @@
   }
   
   .formFieldButton {
-    background-color: #6b5b95;
-    color: white;
+    background-color: #fc936a; /* Choose your preferred color for the button */
+    color: rgb(248, 238, 238);
     border: none;
     outline: none;
     border-radius: 25px;
@@ -124,7 +132,6 @@
     font-size: 0.8em;
     font-weight: 500;
   }
-  
   .formFieldLink {
     color: #66707d;
     text-decoration: none;
@@ -138,13 +145,14 @@
     font-size: 0.9em;
   }
   
+  /* Update the background color for the formFieldCheckbox class */
   .formFieldCheckbox {
     position: relative;
     top: 1.5px;
   }
   
   .formFieldTermsLink {
-    color: white;
+    color: #333; /* Choose a readable text color */
     border-bottom: 1px solid #6b5b95;
     text-decoration: none;
     display: inline-block;
@@ -152,7 +160,14 @@
     margin-left: 5px;
   }
   
-  .socialMediaButtons {
-    padding: 10px 100px 10px 0px;
+
+  .logoContainer {
+    width: 100px;
+    height: 100px;
   }
   
+  .logoImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Preserve the aspect ratio of the image */
+  }

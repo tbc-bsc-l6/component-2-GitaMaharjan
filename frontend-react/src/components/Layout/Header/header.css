@@ -15,6 +15,7 @@
   padding: 10px;
   max-height: 70vh; /* Adjust the max height as a percentage of viewport height */
   overflow-y: auto;
+  width: 800px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -24,10 +25,13 @@
 .dropdown-row {
   display: flex;
   gap: 10px; /* Add space between columns */
+  width: 300px;
+  height: 100px;
 }
 
 .dropdown-column {
   flex: 1;
+
 }
 
 /* Add this CSS to your header.css file or style section */
@@ -44,7 +48,7 @@
 
 /* Hover effect */
 .dropdown-item:hover {
-  background-color: #f5f7fd; /* Change color on hover */
+  background-color: gainsboro; /* Change color on hover */
 }
 
 /* Additional styling if desired */

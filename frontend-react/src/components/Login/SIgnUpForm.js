@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./signup.css";
+import logo from "../../assets/images/logo.png";
+import axios from "axios";
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,10 +31,26 @@ const SignUpForm = () => {
 
     console.log("The form was submitted with the following data:");
     console.log(formData);
+
+    axios
+      .post("http://127.0.0.1:8000/api/registeruser", {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+  const navigateToSignIn = () => {
+    navigate("/login");
   };
 
   return (
-    <div className="formCenter">
+    <div className="app formCenter">
+      <div className="logoContainer">
+        <img src={logo} alt="Logo" className="logoImage" />
+      </div>
       <form onSubmit={handleSubmit} className="formFields">
         <div className="formField">
           <label className="formFieldLabel" htmlFor="name">
@@ -53,6 +75,20 @@ const SignUpForm = () => {
             id="password"
             className="formFieldInput"
             placeholder="Enter your password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="formField">
+          <label className="formFieldLabel" htmlFor="password">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            id="cpassword"
+            className="formFieldInput"
+            placeholder="Enter your password again"
             name="password"
             value={formData.password}
             onChange={handleChange}
@@ -91,9 +127,12 @@ const SignUpForm = () => {
 
         <div className="formField">
           <button className="formFieldButton">Sign Up</button>{" "}
-          <Link to="/sign-in" className="formFieldLink">
+          {/* <Link to="/signin" className="formFieldLink">
             I'm already a member
-          </Link>
+          </Link> */}
+          <button className="formFieldLink" onClick={navigateToSignIn}>
+            I am already a member
+          </button>
         </div>
       </form>
     </div>

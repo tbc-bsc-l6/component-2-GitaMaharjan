@@ -2,46 +2,50 @@ import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/ErrorPage";
-import Home from "./pages/Home";
 import AboutUsPage from "./pages/AboutUsPage";
-import SignInForm from "./components/Login/SignInForm";
-import SignUpForm from "./components/Login/SIgnUpForm";
-import LoginPage from "./pages/LoginPage";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/home",
-        element: <Home />,
-      },
-      {
-        path: "/aboutus",
-        element: <AboutUsPage />,
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
-        children: [
-          {
-            path: "/login/signin",
-            element: <SignInForm />,
-          },
-          {
-            path: "/login/signup",
-            element: <SignUpForm />,
-          },
-        ],
-      },
-    ],
-  },
-]);
+import LoginPage from "./pages/LoginPage";
+import SignUpForm from "./components/Login/SignUpForm";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <RootLayout />,
+//     errorElement: <ErrorPage />,
+//     children: [
+//       {
+//         path: "aboutus",
+//         element: <AboutUsPage />,
+//       },
+//       {
+//         path: "login",
+//         element: <LoginPage />,
+//         children: [
+//           {
+//             path: "signup",
+//             element: <SignUpForm />,
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    // return <RouterProvider router={router} />;
+    <Router>
+      <Routes>
+        <Route path="/" element={<RootLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpForm />} />
+        </Route>
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

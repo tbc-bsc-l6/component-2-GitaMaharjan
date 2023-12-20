@@ -1,13 +1,16 @@
 import React from 'react'
-// import SignInForm from '../components/Login/SignInForm'
-import Login from '../components/Login/Login'
+import SignInForm from "../components/Login/SignInForm";
+import SignUpForm from "../components/Login/SignUpForm";
+
 
 function LoginPage() {
   return (
     <div>
-        <Login></Login>
-    </div>
+   
+
+    <SignInForm />
+  </div>
   )
 }
 
-export default LoginPage
+export default LoginPage;

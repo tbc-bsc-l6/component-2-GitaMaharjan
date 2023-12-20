@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart, AiOutlineShoppingCart, AiOutlineSearch, AiOutlineLogin } from 'react-icons/ai';
 import logo from "../../../assets/images/logo.png";
+import chair from  "../../../assets/images/chair.png";
 import { useEffect, useRef, useState } from "react";
 import DropdownItem from './DropdownItem';
 import "./header.css";
@@ -34,25 +35,29 @@ const Header = () => {
             {dropdownOpen && (
               <div className="dropdown-content">
                 <div className="dropdown-row">
-                  <DropdownItem label="table" href="/table" imageSrc={logo} topic="A spot for midnight snacks " />
-                  <DropdownItem label="chair" href="/chair" imageSrc={logo} topic="Bench seats offer coziness " />
-                  <DropdownItem label="sofa" href="/sofa" imageSrc={logo} topic="the lounge piece with soft" />
-                  <DropdownItem label="bedroom" href="/bedroom" imageSrc={logo} topic="bid farewell to nights of counting  sheep" />
+                  <DropdownItem className="dropdown-column" label="table" href="/table" imageSrc={logo} topic="A spot for midnight snacks " />
+                  <DropdownItem className="dropdown-column" label="chair" href="/chair" imageSrc={chair} topic="Bench seats offer coziness " />
+                  <DropdownItem className="dropdown-column" label="sofa" href="/sofa" imageSrc={logo} topic="the lounge piece with soft" />
               
                 </div>
                 <div className="dropdown-row">
-                  <DropdownItem label="decor" href="/decor" imageSrc={logo} topic="Life for decoration" />
-                  <DropdownItem label="lighting" href="/lighting" imageSrc={logo} topic="live with the warm lightings" />
-                  <DropdownItem label="vases" href="/vases" imageSrc={logo} topic="Additional beauty to the room" />
-                  <DropdownItem label="planters" href="/planters" imageSrc={logo} topic="planters with a sharpness" />
-               
+                  <DropdownItem className="dropdown-column" label="decor" href="/decor" imageSrc={logo} topic="Life for decoration" />
+                  <DropdownItem className="dropdown-column" label="lighting" href="/lighting" imageSrc={logo} topic="live with the warm lightings" />
+                  <DropdownItem  className="dropdown-column" label="vases" href="/vases" imageSrc={logo} topic="Additional beauty to the room" />
+              
+                </div>
+                <div className="dropdown-row">
+
+               <DropdownItem className="dropdown-column" label="planters" href="/planters" imageSrc={logo} topic="planters with a sharpness" />
+                  <DropdownItem className="dropdown-column" label="bedroom" href="/bedroom" imageSrc={logo} topic="bid farewell to nights of counting  sheep" />
+
                 </div>
                 
               </div>
             )}
           </div>
         </Link>
-        
+
         <Link to="/about" className="text-black hover:text-gray-800">
             About Us
           </Link>

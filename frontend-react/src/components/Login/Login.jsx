@@ -1,52 +1,42 @@
-import React, { useState } from "react";
-import SignInForm from "./SignInForm";
-import SignUpForm from "./SIgnUpForm";
+// import React, { useState } from "react";
+// import SignInForm from "./SignInForm";
+// import SignUpForm from "./SgnUpForm";
+// import logo from "../../assets/images/logo.png";
+// import "./Login.css";
 
-import "./Login.css";
+// const Login = () => {
+//   const [activeForm, setActiveForm] = useState("sign-in");
 
-const Login = () => {
-  const [activeForm, setActiveForm] = useState("sign-up");
+//   const switchToSignUp = () => {
+//     setActiveForm("sign-up");
+//   };
 
-  const switchToSignUp = () => {
-    setActiveForm("sign-up");
-  };
+//   const switchToSignIn = () => {
+//     setActiveForm("sign-in");
+//   };
 
-  const switchToSignIn = () => {
-    setActiveForm("sign-in");
-  };
+//   return (
+//     <div className="login-container">
+//       <div className="logo-container">
+//         <img src={logo} alt="Logo" />
+//       </div>
+//       {activeForm === "sign-in" && <SignInForm />}
+//       {activeForm === "sign-up" && <SignUpForm />}
+//       <div className="switch-form">
+//         {activeForm === "sign-in" ? (
+//           <p>
+//             Don't have an account?{" "}
+//             <span onClick={switchToSignUp}>Create new account</span>
+//           </p>
+//         ) : (
+//           <p>
+//             Already have an account?{" "}
+//             <span onClick={switchToSignIn}>Sign In</span>
+//           </p>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
 
-  return (
-    <div className="App">
-      <div className="appAside"> 
-        <img src="/path/to/your/logo.png" alt="Logo" className="logo" />
-        <p className="asideText">Why sign up? Get connected and more!</p>
-      </div>
-
-      <div className="appForm">
-        <div className="pageSwitcher">
-          <button
-            onClick={switchToSignIn}
-            className={`pageSwitcherItem ${
-              activeForm === "sign-in" ? "pageSwitcherItem-active" : ""
-            }`}
-          >
-            Sign In
-          </button>
-          <button
-            onClick={switchToSignUp}
-            className={`pageSwitcherItem ${
-              activeForm === "sign-up" ? "pageSwitcherItem-active" : ""
-            }`}
-          >
-            Sign Up
-          </button>
-        </div>
-
-        {activeForm === "sign-up" && <SignUpForm />}
-        {activeForm === "sign-in" && <SignInForm />}
-      </div>
-    </div>
-  );
-};
-
-export default Login;
+// export default Login;
