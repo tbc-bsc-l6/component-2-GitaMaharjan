@@ -56,7 +56,7 @@ const Signup = () => {
             type: 'customer',
           })
         );
-        localStorage.setItem('loginItem', response.api_token);
+        localStorage.setItem('token', response.api_token);
         navigate('/');
         setFullname('');
         setEmail('');

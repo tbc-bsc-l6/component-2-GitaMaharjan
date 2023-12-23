@@ -38,7 +38,7 @@ const Signin = () => {
       axios.post("http://127.0.0.1:8000/api/signin", userData).then((response) => {
         if(response.data.status==="true"){
           dispatch(loginUser({fullname: response.data.fullname, email: loginData.email, token: response.data.api_token, image: response.data.image, type: "customer"}));
-          localStorage.setItem('loginItem', response.data.api_token);
+          localStorage.setItem('token', response.data.api_token);
           navigate("/");
         }
         else{

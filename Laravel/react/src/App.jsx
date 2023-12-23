@@ -13,7 +13,11 @@ import Loader from './customer/Loader';
 import PageNotFound from './pages/PageNotFound';
 import ContactUsPage from './pages/ContactUsPage';
 // import CircularColor from './trial/CircularColor';
-// import StandardImageList from './trial/StandardImageList';
+import StandardImageList from './trial/StandardImageList';
+// import Banner from './trial/Banner';
+// import Newsletter from './trial/newsletter';
+import LoginPage from './admin/Login'
+
 
 
 const App = () => {
@@ -23,7 +27,7 @@ const App = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   // console.log(isLogin);
-  let tokenInfilestorage = localStorage.getItem("loginItem");
+  let tokenInfilestorage = localStorage.getItem("token");
   const loginData = useSelector((state)=>{
     return state.authReducer.signin[0];
   })
@@ -81,8 +85,16 @@ const App = () => {
       <Route path='/changepassword' element={<ResetPasswordPage/>}></Route>
       <Route path='/userprofile' element={<UserProfilePage/>}/>
 
-      {/* <Route path='/cir' element={<CircularColor/>}/>
-      <Route path='/image' element={<StandardImageList/>}/> */}
+      {/* <Route path='/cir' element={<CircularColor/>}/> */}
+      <Route path='/image' element={<StandardImageList/>}/>
+      {/* <Route path='/banner' element={<Banner/>}/>
+      <Route path='/new' element={<Newsletter/>}/> */}
+      
+
+
+      <Route path='/admin' element={<LoginPage/>}/>
+
+
 
 
 

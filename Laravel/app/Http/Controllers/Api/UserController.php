@@ -39,7 +39,7 @@ class UserController extends Controller
             'fullname' => $request->fullname,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'image' => 'p1.jpg',
+            'image' => 'static.jpg',
             'usertype' => 'customer'
         ]);
 
@@ -54,7 +54,7 @@ class UserController extends Controller
                 'message' => 'User created successfully',
                 'fullname' => $request->fullname,
                 'email' => $request->email,
-                'image' => 'p1.jpg',
+                'image' => 'static.jpg',
                 'api_token' => $token
             ], 200);
         }
@@ -86,7 +86,7 @@ class UserController extends Controller
             'status' => 'true',
             'api_token' => $token,
             'fullname' => $user->fullname,
-            'image' => 'p1.jpg'
+            'image' => 'static.jpg'
         ], 201);
     } else {
         // Return a failed response if login credentials are invalid
@@ -113,7 +113,7 @@ class UserController extends Controller
                 'fullname' => $user['fullname'],
                 'email' => $user['email'],
                 'status' => 'true',
-                'image' => 'p1.jpg',
+                'image' => 'static.jpg',
                 'type' => $user['usertype']
             ]);
         } else {

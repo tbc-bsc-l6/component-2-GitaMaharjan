@@ -12,7 +12,7 @@ const UserProfile = () => {
   const nav = useNavigate();
   const logout = () =>{
    
-    localStorage.setItem("loginItem", "");
+    localStorage.setItem("token", "");
     dispatch(logoutUser({fullname: "", email: "", token: "", image: "", type: ""}));
 
     nav("/");
