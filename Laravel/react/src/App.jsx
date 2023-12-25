@@ -1,3 +1,4 @@
+
 import React, {useEffect, useState} from 'react'
 import {Routes, Route} from 'react-router-dom';
 import HomePage from "./pages/HomePage";
@@ -16,7 +17,8 @@ import ContactUsPage from './pages/ContactUsPage';
 import StandardImageList from './trial/StandardImageList';
 // import Banner from './trial/Banner';
 // import Newsletter from './trial/newsletter';
-import LoginPage from './admin/Login'
+import Dashboard from './admin/Dashboard';
+import LoginPage from './admin/LoginPage';
 
 
 
@@ -26,6 +28,8 @@ const App = () => {
 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+
+
   // console.log(isLogin);
   let tokenInfilestorage = localStorage.getItem("token");
   const loginData = useSelector((state)=>{
@@ -35,22 +39,21 @@ const App = () => {
   useEffect(()=>{
     if(tokenInfilestorage != ""){
   let url = "http://127.0.0.1:8000/api/authentication";
-
       let token = tokenInfilestorage;
       let userData= {
         "token": token
       };
       try{
-        const data = axios.post(url, userData).then((response) => {
-          // console.log(response.data.user[0].fullname);
+        const data = axios.post(url, userData, { headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },}).then((response) => {
           if(response.data.status==='true'){
             if(response.data.type==='customer'){
-              dispatch(loginUser({fullname: response.data.fullname, email: response.data.email, token: token, image: response.data.image, type: "customer"}));
+              dispatch(loginUser({id: response.data.id, fullname: response.data.fullname, email: response.data.email, token: token, image: response.data.image, type: "customer"}));
               setIsLogin(true); 
             }
             else if(response.data.type==='admin')
-              dispatch(loginUser({fullname: response.data.fullname, email: response.data.email, token: token, image: response.data.image, type: "admin"}));
-         
+              dispatch(loginUser({id: response.data.id, fullname: response.data.fullname, email: response.data.email, token: token, image: response.data.image, type: "admin"}));
           }
           setLoading(false);
           
@@ -92,6 +95,7 @@ const App = () => {
       
 
 
+      <Route path='/dashboard' element={<Dashboard/>}/>
       <Route path='/admin' element={<LoginPage/>}/>
 
 

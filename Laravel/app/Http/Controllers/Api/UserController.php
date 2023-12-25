@@ -123,4 +123,67 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function loginAdmin(Request $request) {
+        $validation = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        $tokenEntry = User::where('email', $request->email)->where('usertype', 'admin')->first();
+    
+        if ($tokenEntry && User::where('password', $request->password)) {
+            $userTable = User::where('email', $request->email)->first();
+            $userId = $userTable->id;
+    
+            $token = $tokenEntry->createToken($request->email)->plainTextToken;
+            Token::create(['user_id' => $userId, 'token_id' => $token]);
+    
+            return response([
+                'message' => 'User successfully logged in',
+                'status' => true,
+                'api_token' => $token,
+                'fullname' => $userTable->fullname,
+                'image' => 'static.jpg'
+            ], 201);
+        } else {
+            return response([
+                'message' => 'Login failed. Invalid credentials or user not authorized.',
+                'status' => false,
+            ], 200);
+        }
+    }
+    
+
+        // public function loginAdmin(Request $request) {
+        //     $request->validate([
+        //         'email' => 'required|email',
+        //         'password' => 'required',
+        //     ]);
+
+        //     $credentials = $request->only('email', 'password');
+
+        //     if (Auth::attempt($credentials) && Auth::user()->usertype === 'admin') {
+        //         $user = Auth::user();
+        //         $token = $user->createToken($request->email)->plainTextToken;
+
+        //         // Assuming you have a 'tokens' table to store tokens
+        //         Token::create(['user_id' => $user->id, 'token_id' => $token]);
+
+        //         return response([
+        //             'message' => 'User successfully logged in',
+        //             'status' => true,
+        //             'api_token' => $token,
+        //             'fullname' => $user->fullname,
+        //             'image' => 'static.jpg',
+        //         ], 201);
+        //     }
+
+        //     return response([
+        //         'message' => 'Login failed. Invalid credentials or user not authorized.',
+        //         'status' => false,
+        //     ], 401);
+        // }
+
+
 }
