@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ProductController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,4 +26,6 @@ Route::post("/signup", [UserController::class, 'signup']);
 Route::post("/signin", [UserController::class, 'signin']);
 Route::post("/authentication", [UserController::class, 'authentication']);
 Route::post("/adminlogin", [UserController::class, 'loginAdmin']);
-Route::post("/loginAdmin", [UserController::class, 'loginAdmin']);
+
+// PRODUCTS
+Route::post("/addproduct", [ProductController::class, 'addProduct']);

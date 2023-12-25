@@ -1,18 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import SidebarBoard from './SidebarBoard';
+import ProductForm from './ProductForm';
 
 function Dashboard() {
   return (
-    <div>
-      i am dashboard   
+    <div className="flex">
+      <SidebarBoard />
 
-
-      <Link to='/admin'>
-      <button type='submit'>logout</button>
-
-      </Link>
+      <div className="flex-grow ml-4 p-8">
+        <ProductForm/>
+      </div>
+      <main>
+        <Outlet/>
+      </main>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

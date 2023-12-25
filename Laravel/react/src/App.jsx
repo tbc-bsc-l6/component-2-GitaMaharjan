@@ -19,6 +19,8 @@ import StandardImageList from './trial/StandardImageList';
 // import Newsletter from './trial/newsletter';
 import Dashboard from './admin/Dashboard';
 import LoginPage from './admin/LoginPage';
+import OverviewPage from './admin/adminlayouts/OverviewPage';
+import ProductPage from './admin/adminlayouts/ProductPage';
 
 
 
@@ -96,6 +98,9 @@ const App = () => {
 
 
       <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route index element={<OverviewPage/>}/>
+        <Route path='products' element={<ProductPage/>}/>
+      <Route/>
       <Route path='/admin' element={<LoginPage/>}/>
 
 
