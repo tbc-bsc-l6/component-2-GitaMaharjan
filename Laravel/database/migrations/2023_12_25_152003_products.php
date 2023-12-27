@@ -9,15 +9,38 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    // public function up(): void
+    // {
+    //     Schema::create('products', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->string('name');
+    //         $table->longText("description");
+    //         $table->integer("price");
+    //         $table->integer("quantity");
+    //         $table->string('file')->nullable(); // Add this line for the file path
+    //         $table->timestamps();
+    //     });
+    // }
+
+    // /**
+    //  * Reverse the migrations.
+    //  */
+    // public function down(): void
+    // {
+    //     Schema::dropIfExists('products');
+    // }
+
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string("image");
             $table->longText("description");
-            $table->integer("price");
             $table->integer("quantity");
-            $table->string('file')->nullable(); // Add this line for the file path
+            $table->integer("price");
+            $table->foreignId('category_id');
+            $table->integer('discount_id');
             $table->timestamps();
         });
     }
@@ -29,4 +52,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('products');
     }
+
+
 };
