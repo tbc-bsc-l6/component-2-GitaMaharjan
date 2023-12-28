@@ -29,6 +29,7 @@ import Category from './Admin/Category';
 import Product from './Admin/Product';
 import ProductForm from './Admin/ProductForm';
 import CategoryForm from './Admin/CategoryForm';
+import Users from './Admin/Users';
 // import EditProduct from './Admin/EditProduct'
 
 
@@ -126,6 +127,9 @@ const App = () => {
         <Route path='category' element={<Category/>}/>
         <Route path='category-form' element={<CategoryForm/>}/>
         {/* <Route path='edit_product/:id' element={<EditProduct/>}/> */}
+
+        <Route path='users' element={<Users/>}/>
+
 
 
       </Route>

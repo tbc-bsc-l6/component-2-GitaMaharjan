@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
 
@@ -23,10 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post("/signup", [UserController::class, 'signup']);
-Route::post("/signin", [UserController::class, 'signin']);
-Route::post("/authentication", [UserController::class, 'authentication']);
-Route::post("/adminlogin", [UserController::class, 'adminLogin']);
+Route::post("/signup", [AuthController::class, 'signup']);
+Route::post("/signin", [AuthController::class, 'signin']);
+Route::post("/authentication", [AuthController::class, 'authentication']);
+Route::post("/adminlogin", [AuthController::class, 'adminLogin']);
 
 // PRODUCTS
 Route::post("/add-products", [ProductController::class, "addProduct"]);

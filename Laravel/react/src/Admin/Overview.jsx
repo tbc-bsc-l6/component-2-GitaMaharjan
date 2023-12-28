@@ -61,7 +61,7 @@ const Overview = ({outlet}) => {
                 Category
               </Sidebar.Item>
           </Link>
-          <Sidebar.Item href="#" icon={HiUser}>
+          <Sidebar.Item href="/dashboard/users" icon={HiUser}>
             Users
           </Sidebar.Item>
           <Sidebar.Item href="#" icon={FaClipboardList}>
