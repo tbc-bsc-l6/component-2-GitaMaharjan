@@ -11,7 +11,6 @@ const HomePage = () => {
     <>
     <div className='font-[poppins] h-screen'>
       <Header/>
-
     <Footer/>
     </div>
     </>

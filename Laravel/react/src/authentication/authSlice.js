@@ -1,3 +1,62 @@
+import { createSlice, nanoid } from "@reduxjs/toolkit";
+
+const initialState = {
+  signin: [
+    {
+      id: "",
+      fullname: "",
+      email: "",
+      token: "",
+      image: "",
+      type: "",
+    },
+    {
+      id: "",
+      fullname: "",
+      email: "",
+      token: "",
+      image: "",
+      type: "",
+    },
+  ],
+};
+
+export const authSlice = createSlice({
+  name: "signin",
+  initialState,
+  reducers: {
+    loginUser: (state, action) => {
+      const loginUser = action.payload;
+      if (action.payload.type === "customer") state.signin[0] = loginUser;
+      else if (action.payload.type === "admin") state.signin[1] = loginUser;
+    },
+    logoutUser: (state, action) => {
+      const logoutUser = {
+        fullname: "",
+        email: "",
+        token: "",
+        image: "",
+        type: "",
+      };
+      state.signin[0] = logoutUser;
+    },
+    logoutUserAdmin: (state, action) => {
+      const logoutUser = {
+        fullname: "",
+        email: "",
+        token: "",
+        image: "",
+        type: "",
+      };
+      state.signin[1] = logoutUser;
+    },
+  },
+});
+
+export const { loginUser, logoutUser, logoutUserAdmin } = authSlice.actions;
+
+export default authSlice.reducer;
+
 //********************************************************************** */
 // import { createSlice } from "@reduxjs/toolkit";
 
@@ -40,43 +99,43 @@
 
 // ******************************************************************************************************
 
-import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
-  signin: [createEmptyUser(), createEmptyUser(), createEmptyUser()],
-};
+// import { createSlice } from "@reduxjs/toolkit";
+// const initialState = {
+//   signin: [createEmptyUser(), createEmptyUser(), createEmptyUser()],
+// };
 
-function createEmptyUser() {
-  return {
-    fullname: "",
-    email: "",
-    token: "",
-    image: "",
-    type: "",
-  };
-}
+// function createEmptyUser() {
+//   return {
+//     fullname: "",
+//     email: "",
+//     token: "",
+//     image: "",
+//     type: "",
+//   };
+// }
 
-export const authSlice = createSlice({
-  name: "signin",
-  initialState,
-  reducers: {
-    loginUser: (state, action) => {
-      const loginUser = action.payload;
-      // const index = loginUser.type === "customer" ? 0 : 1;
-      const index =
-        loginUser.type === "customer" ? 0 : loginUser.type === "admin" ? 1 : 2;
+// export const authSlice = createSlice({
+//   name: "signin",
+//   initialState,
+//   reducers: {
+//     loginUser: (state, action) => {
+//       const loginUser = action.payload;
+//       // const index = loginUser.type === "customer" ? 0 : 1;
+//       const index =
+//         loginUser.type === "customer" ? 0 : loginUser.type === "admin" ? 1 : 2;
 
-      state.signin[index] = loginUser;
-    },
-    logoutUser: (state) => {
-      state.signin[0] = createEmptyUser();
-    },
-    logoutUserAdmin: (state) => {
-      state.signin[1] = createEmptyUser();
-    },
-  },
-});
+//       state.signin[index] = loginUser;
+//     },
+//     logoutUser: (state) => {
+//       state.signin[0] = createEmptyUser();
+//     },
+//     logoutUserAdmin: (state) => {
+//       state.signin[1] = createEmptyUser();
+//     },
+//   },
+// });
 
-export const { loginUser, logoutUser, logoutUserAdmin } = authSlice.actions;
+// export const { loginUser, logoutUser, logoutUserAdmin } = authSlice.actions;
 
-export default authSlice.reducer;
+// export default authSlice.reducer;
 // ******************************************************************************************************

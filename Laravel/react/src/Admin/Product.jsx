@@ -16,12 +16,15 @@ const Product = () => {
         setSearchValue(value);
     }
     
-    const deleteProduct = (event)=>{
-        event.preventDefault();
-        let id = event.target.dataset.id;
+    const deleteProduct = (e)=>{
+        e.preventDefault();
+        let id = e.target.dataset.id;
         axios.delete("http://127.0.0.1:8000/api/delete-products/"+id).then((response)=>{
             // console.log(response);
             dispatch(deleteProduct({id: id}));
+            if(response.status===true){
+                alert("Product is deleted")
+            }
         })
     }
 

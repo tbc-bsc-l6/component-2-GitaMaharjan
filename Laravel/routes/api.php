@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CategoryController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,11 @@ Route::post("/add-product-images", [ProductController::class, "addProductImage"]
 Route::post("update-products", [ProductController::class, "updateProduct"]);
 Route::delete("/delete-products/{id}", [ProductController::class, "deleteProduct"]);
 Route::get("/get-products", [ProductController::class, "getProducts"]);
+
+// categories
+Route::get("/get-categories", [CategoryController::class, 'getCategories']);
+Route::post("/add-categories", [CategoryController::class, 'addCategory']);
+Route::delete("/delete-categories/{id}", [CategoryController::class, "deleteCategory"]);
+// Route::post("/get_single_product", [ProductController::class, "get_single_product"]);
+
+// Route::get("product/{id}", [ProductController::class, "get_single_product"]);

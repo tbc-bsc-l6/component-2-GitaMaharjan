@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Category = () => {
     const dispatch = useDispatch();
     
-      const itemCat  = useSelector((state => ( state.categoryReducer.category)));
+      const items = useSelector((state => ( state.categoryReducer.category)));
 
       useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/get-categories")
@@ -29,7 +29,7 @@ const Category = () => {
 
       <div className='flex md:flex-row flex-col md:mt-0 mt-4 items-baseline justify-between gap-5'>
 
-      <Link to='/dashboard/add_category'>
+      <Link to='/dashboard/category-form'>
       <button type='submit' className=" relative overflow-x-auto shadow-md sm:rounded-lg  w-full bg-pink text-black py-2 px-4 rounded hover:bg-pink-200"
 >Add Category from here</button>
         </Link>
@@ -64,22 +64,22 @@ const Category = () => {
         </thead>
         <tbody>
            {/* <tr className={itemCat.length === 0 ? 'block': 'hidden'}><td>No data</td></tr> */}
-    {itemCat ? (
-        itemCat.map((cat, id)=>{
+    {items ? (
+        items.map((category, id)=>{
             
             return (
-                <tr key={cat.nanoid} >
+                <tr key={category.nanoid} >
                     <td className="px-6 py-4">
                         {id+1}
                     </td>
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {cat.name}
+                        {category.name}
                     </th>
                     <td className="px-6 py-4">
-                        {cat.description}
+                        {category.description}
                     </td>
                     <td className="px-6 py-4">
-                    {cat.date ? cat.date.substring(0, 10) : 'N/A'}
+                    {category.date ? category.date.substring(0, 10) : 'N/A'}
                     </td>
                     <td className="px-6 py-4">
                         {/* <Link data-id={cat.id} onClick={(e)=>{deleteCategory(e)}} className="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</Link> */}

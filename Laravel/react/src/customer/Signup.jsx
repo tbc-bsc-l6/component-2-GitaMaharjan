@@ -75,7 +75,7 @@ const Signup = () => {
   return (
     <>
       {isLoggedin.token !== '' ? (
-        <Navigate to="/" />
+        <Navigate to="/home" />
       ) : (
         <form onSubmit={(event) => submitHandler(event)} className="mt-0 mb-8 rounded-lg overflow-hidden">
           <div className="bg[#e0ceb8] min-h-screen flex flex-col items-center justify-center">
@@ -87,7 +87,7 @@ const Signup = () => {
                 <p className={`w-[100%] mx-auto text-center text-lg mb-4 text-${status.color}`}>
                   {status.status}
                 </p>
-                <Link to="/" className="logo flex items-center justify-center mb-4">
+                <Link to="/home" className="logo flex items-center justify-center mb-4">
                   <img src={logo} alt="Logo" style={{ width: 'calc(140px + 2px)', height: 'auto' }} />
                 </Link>
 

@@ -39,7 +39,7 @@ const Signin = () => {
         if(response.data.status==="true"){
           dispatch(loginUser({fullname: response.data.fullname, email: loginData.email, token: response.data.api_token, image: response.data.image, type: "customer"}));
           localStorage.setItem('token', response.data.api_token);
-          navigate("/");
+          navigate("/home");
         }
         else{
           setLoad(false);
@@ -56,7 +56,7 @@ const Signin = () => {
 
   return (
     
-    isLoggedin.token != "" ? <Navigate to="/"/> : <div className='w-[100%] -z-20 mt-16 mb-16'>
+    isLoggedin.token != "" ? <Navigate to="/home"/> : <div className='w-[100%] -z-20 mt-16 mb-16'>
       <div className="md:w-[40%] w-[100%] -z-20 mx-auto bg-pink rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8 -z-20">
       <p className={`w-[100%] mx-auto text-center text-lg mb-4 text-${status.color} `} >{status.status}</p>
@@ -67,7 +67,7 @@ const Signin = () => {
 )}
 
 
-      <Link to="/" className='logo flex items-center justify-center mb-4'>
+      <Link to="/home" className='logo flex items-center justify-center mb-4'>
                 <img src={logo} alt="Logo" style={{ width: 'calc(140px + 2px)', height: 'auto' }} />
                 </Link>
 

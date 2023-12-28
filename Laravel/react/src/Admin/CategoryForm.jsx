@@ -24,7 +24,6 @@ function CategoryForm() {
       axios.post("http://127.0.0.1:8000/api/add-categories", formData, { headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },}).then((response)=>{
-          alert("Data has been saved")
           navigate("/dashboard/category");
 
          

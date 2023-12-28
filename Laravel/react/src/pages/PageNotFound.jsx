@@ -19,7 +19,7 @@ const PageNotFound = () => {
                   The page you are looking for it maybe deleted
                 </p>
                 <a
-                  href="/"
+                  href="/home"
                   className="inline-block rounded-lg border border-red-500 px-8 py-3 text-center text-red-500 font-semibold text-red-500 transition hover:bg-blue-100 hover:text-primary"
                 >
                   Go To Home

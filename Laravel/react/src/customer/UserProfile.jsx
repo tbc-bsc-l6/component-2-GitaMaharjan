@@ -15,7 +15,7 @@ const UserProfile = () => {
     localStorage.setItem("token", "");
     dispatch(logoutUser({fullname: "", email: "", token: "", image: "", type: ""}));
 
-    nav("/");
+    nav("/home");
   }
   let loginData = useSelector((state)=>{
     return state.authReducer.signin[0];

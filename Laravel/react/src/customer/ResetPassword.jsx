@@ -6,7 +6,7 @@ const ResetPassword = () => {
   return (
         <section className="bg-pink dark:bg-gray-900 mt-16 mb-16">
   <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-  <Link to="/" className='logo flex items-center justify-center mb-4'>
+  <Link to="/home" className='logo flex items-center justify-center mb-4'>
                 <img src={logo} alt="Logo" style={{ width: 'calc(140px + 2px)', height: 'auto' }} />
                 </Link>
       <div className="w-full p-6 bg-pink rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">

@@ -30,7 +30,7 @@ const Search = () => {
       <section className='search'>
         <div className='container c_flex'>
 
-          <Link to="/" className='logo width '>
+          <Link to="/home" className='logo width '>
             <img src={logo} alt='' />
           </Link>
 

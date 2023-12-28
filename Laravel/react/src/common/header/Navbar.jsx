@@ -19,16 +19,16 @@ const Navbar = () => {
       >
           <ul className="flex align-middle text-black text-[12px] justify-between items-center md:flex-row flex-col md:gap-[4em] gap-[1em] z-999999">
               <li className="hover:text-red-400 duration-[0.6s]">
-                <Link to="/">Beds</Link>
+                <Link to="/home">Beds</Link>
               </li>
               <li className="hover:text-red-500 duration-[0.6s]">
-                <Link to="/">Chairs</Link>
+                <Link to="/home">Chairs</Link>
               </li>
               <li className="hover:text-red-500 duration-[0.6s]">
-                <Link to="/">Sofa</Link>
+                <Link to="/home">Sofa</Link>
               </li>
               <li className="hover:text-red-500 duration-[0.6s]">
-                <Link to="/">Vases</Link>
+                <Link to="/home">Vases</Link>
               </li>
               <li className="hover:text-red-500 duration-[0.6s] cursor-pointer">
                 <p
