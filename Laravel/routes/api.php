@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
-
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +27,16 @@ Route::post("/signup", [AuthController::class, 'signup']);
 Route::post("/signin", [AuthController::class, 'signin']);
 Route::post("/authentication", [AuthController::class, 'authentication']);
 Route::post("/adminlogin", [AuthController::class, 'adminLogin']);
+
+// Route::group(['middleware' => 'cors'], function () {
+    Route::resource('users',UserController::class);
+// });
+
+
+// user
+// Route::resource('users',UserController::class);
+// Route::get('/users',[UserController::class,'getUser']);
+
 
 // PRODUCTS
 Route::post("/add-products", [ProductController::class, "addProduct"]);
