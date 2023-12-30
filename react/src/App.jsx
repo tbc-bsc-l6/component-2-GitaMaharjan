@@ -106,7 +106,7 @@ const App = () => {
       <Route path='/aboutus' element={<AboutUsPage/>}/>
       <Route path='/changepassword' element={<ResetPasswordPage/>}></Route>
       <Route path='/userprofile' element={<UserProfilePage/>}/>
-      <Route path="/home/:id" element={<CollectionsPage/>}/>
+      <Route path="/home/:product_slug" element={<CollectionsPage/>}/>
 
       {/* <Route path='/cir' element={<CircularColor/>}/> */}
       <Route path='/image' element={<StandardImageList/>}/>

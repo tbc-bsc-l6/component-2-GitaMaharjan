@@ -13,20 +13,20 @@ class FrontendController extends Controller
     //     $category=Category::where('name',$slug)->where('status','0')->first();
     //     if($category){
     //         $product=Product::where('category_id',$category->id)->where('status','0')->get();
-    //         if($product){
-    //             return response()->json([
-    //                 'status'=>200,
-    //                 'product_data'=>[
-    //                     'product'=>$product,
-    //                     'category'=>$category,
-    //                 ]
-    //             ]);
-    //         }else{
-    //             return response()->json([
-    //                 'status'=>404,
-    //                 'message'=>"No Product Available"
-    //             ]);
-    //         }
+            // if($product){
+            //     return response()->json([
+            //         'status'=>200,
+            //         'product_data'=>[
+            //             'product'=>$product,
+            //             'category'=>$category,
+            //         ]
+            //     ]);
+            // }else{
+            //     return response()->json([
+            //         'status'=>404,
+            //         'message'=>"No Product Available"
+            //     ]);
+            // }
 
     //     }else{
     //         return response()->json([
@@ -43,16 +43,25 @@ class FrontendController extends Controller
         // 2. Check if a category was found.
         if ($category) {
             // 3. Retrieve products related to the category.
-            $products = Product::where('category_id', $category->id)->get();
+            $product = Product::where('category_id', $category->id)->get();
     
             // 4. Return a JSON response with a 200 status code, including product and category data.
-            return response()->json([
-                'status' => 200,
-                'product_data' => [
-                    'products' => $products,
-                    'category' => $category,
-                ],
-            ]);
+            
+            if($product){
+
+                    return response()->json([
+                        'status' => 200,
+                        'product_data' => [
+                            'product' => $product,
+                            'category' => $category,
+                        ],
+                    ]);
+            }else{
+                    return response()->json([
+                                'status'=>404,
+                                'message'=>"No Product Available"
+                            ]);
+                }
         } else {
             // 5. Return a JSON response with a 404 status code and a message if no category is found.
             return response()->json([

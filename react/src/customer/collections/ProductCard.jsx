@@ -12,6 +12,7 @@ function ProductCard(props) {
     const [loading,setLoading]=useState(true);
     const [product,setProduct]=useState([]);
     const [category,setCategory]=useState([]);
+    const productCount=product.length;
 
     useEffect(()=>{
         let isMounted=true;
@@ -47,43 +48,42 @@ function ProductCard(props) {
 
   return (
     <div>
-        {loading?<CircularColor/>:
+        {loading?<CircularColor/>:(productCount>0?
 
-            product.map((item,id)=>(
+            product.map((item,id)=>{
+                return(
+                    <div className="max-w-sm m-10" key={id}>{category.name}
+                    
+                        <div className="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                            <Link to="">
+                                <img className="w-full h-48 object-cover rounded-t-lg" src={item.image} alt={item.name} />
+                            </Link>
+                            <div className="p-4">
+                            <a href="#" className="text-gray-900 dark:text-white">
+                                <h5 className="text-l font-semibold tracking-tight">{item.name}</h5>
+                            </a>
 
+                            <div className="flex items-center justify-between mt-3">
+                                <span className="text-l font-bold text-gray-900 dark:text-white">{item.price}</span>
 
-                <div className="max-w-sm m-10" key={id}>{category.name}
-                
-                <div className="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <Link to="">
-                        <img className="w-full h-48 object-cover rounded-t-lg" src={item.image} alt={item.name} />
-                    </Link>
-                    <div className="p-4">
-                    <a href="#" className="text-gray-900 dark:text-white">
-                        <h5 className="text-l font-semibold tracking-tight">{item.name}</h5>
-                    </a>
-
-                    <div className="flex items-center justify-between mt-3">
-                        <span className="text-l font-bold text-gray-900 dark:text-white">{item.price}</span>
-
-                        <a
-                        href="#"
-                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-                        Add to Cart
-                        </a>
+                                <a
+                                href="#"
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                >
+                                Add to Cart
+                                </a>
+                            </div>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
-                </div>
-
-
-            ))
-                
+                )
+            })
+        :<h1>No Products</h1>)
         }
     </div>
-    
-  );
+  )
 }
+
+
 
 export default ProductCard;
