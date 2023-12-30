@@ -9,6 +9,8 @@ function CategoryForm() {
 
     const [categoryName, setCategoryName] = useState('');
     const [categoryDescription, setCategoryDescription] = useState('');
+    const [categoryImage, setCategoryImage] = useState(null);
+
 
   
   
@@ -19,6 +21,8 @@ function CategoryForm() {
       const formData=new FormData();
       formData.append("name",categoryName);
       formData.append("description",categoryDescription);
+      formData.append("image", categoryImage);
+
 
   
       axios.post("http://127.0.0.1:8000/api/add-categories", formData, { headers: {
@@ -28,8 +32,14 @@ function CategoryForm() {
 
          
       }) 
+    
   
-  
+    };
+    const handleImageChange = (e) => {
+      // Ensure there is a file selected before setting the state
+      if (e.target.files && e.target.files.length > 0) {
+        setCategoryImage(e.target.files[0]);
+      }
     };
   
     return (
@@ -65,6 +75,18 @@ function CategoryForm() {
             required
           />
         </div>
+        <div className="mb-4">
+        <label htmlFor="categoryImage" className="block text-sm font-bold text-gray-700 mb-2">
+          Category Image
+        </label>
+        <input
+          id="categoryImage"
+          type="file"
+          onChange={handleImageChange}
+          className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          required
+        />
+      </div>
 
   
         {/* Save Button */}

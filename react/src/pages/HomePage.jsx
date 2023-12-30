@@ -5,7 +5,7 @@ import Footer from '../common/footer/Footer';
 import Header from '../common/header/Header';
 import Newproducts from '../customer/Newproducts';
 import Slider from '../customer/Slider';
-import CategoryBody from '../customer/CategoryBody';
+import CategoryBody from '../customer/collections/CategoryBody';
 import StandardImageList from '../trial/StandardImageList';
 
 

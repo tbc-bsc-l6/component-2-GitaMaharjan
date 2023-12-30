@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description');
+            $table->string('image')->nullable(); // Add the image field with nullable option
             $table->timestamps();
         });
     }

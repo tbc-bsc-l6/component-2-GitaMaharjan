@@ -29,6 +29,8 @@ Route::post("/signin", [AuthController::class, 'signin']);
 Route::post("/authentication", [AuthController::class, 'authentication']);
 Route::post("/adminlogin", [AuthController::class, 'adminLogin']);
 
+Route::get('storage/category_images/{filename}', 'CategoryController@getImage')->name('category.image');
+
 
     // Route::resource('users',UserController::class);
 // });

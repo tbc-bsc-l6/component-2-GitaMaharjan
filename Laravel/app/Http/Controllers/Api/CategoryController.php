@@ -21,14 +21,21 @@ class CategoryController extends Controller
 
     public function addCategory(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
         // Extract data from the request
         $categoryData = [
             'name' => $request->input('name'),
             'description' => $request->input('description'),
+            'image'=>$request->file('image')->store('category_images', 'public')
+            
         ];
 
         try {
-            // Create a new category in the database
+
             $category = Category::create($categoryData);
 
             // Check if the category was successfully created
@@ -42,6 +49,20 @@ class CategoryController extends Controller
             return response(['status' => 'false', 'error' => $e->getMessage()]);
         }
     }
+
+    public function getImage($filename)
+{
+    $path = storage_path('app/public/category_images/' . $filename);
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    $file = file_get_contents($path);
+
+    return response($file, 200)->header('Content-Type', 'image/jpeg'); // Adjust the content type based on your image format
+}
+
 
 
 

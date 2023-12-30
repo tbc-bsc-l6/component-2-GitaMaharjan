@@ -55,6 +55,9 @@ const Category = () => {
                     Description
                 </th>
                 <th scope="col" className="px-6 py-3">
+                    Image
+                </th>
+                <th scope="col" className="px-6 py-3">
                 Date
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -78,6 +81,23 @@ const Category = () => {
                     <td className="px-6 py-4">
                         {category.description}
                     </td>
+                    {/* <td className="px-6 py-4">
+                        {category.image}
+                    </td> */}
+
+<td className="px-6 py-4">
+                {/* Display the image using the img element */}
+                {category.image && (
+                  <img
+                    src={`http://127.0.0.1:8000/storage/${category.image}`}
+                    alt={`Image for ${category.name}`}
+                    className="w-20 h-20 object-cover"
+                  />
+                )}
+              </td>
+
+
+
                     <td className="px-6 py-4">
                     {category.date ? category.date.substring(0, 10) : 'N/A'}
                     </td>
