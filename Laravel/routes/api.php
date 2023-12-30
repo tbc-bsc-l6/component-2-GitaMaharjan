@@ -54,6 +54,7 @@ Route::get("/get-products", [ProductController::class, "getProducts"]);
 Route::get("/fetch-category-products/{slug}",[FrontendController::class,"product"]);
 
 
+Route::post("/get_single_product", [FrontendController::class, "get_single_product"]);
 
 
 // categories

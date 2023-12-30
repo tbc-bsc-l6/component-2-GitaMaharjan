@@ -70,5 +70,12 @@ class FrontendController extends Controller
             ]);
         }
     }
+
+        public function get_single_product(Request $request){
+            $id = $request->id;
+            $arr = Product::find($id)->toArray();
+            $category = Product::find($id)->get_category->toArray();
+            return response(['product'=>$arr, 'category'=> $category, 'result'=> 'none']);
+    }
     
 }

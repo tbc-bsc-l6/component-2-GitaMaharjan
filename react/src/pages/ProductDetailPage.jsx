@@ -1,17 +1,16 @@
 import React from 'react'
 import Header from '../common/header/Header'
-import ProductCard from '../customer/collections/ProductCard'
 import Footer from '../common/footer/Footer'
+import ProductDetail from '../customer/collections/ProductDetail'
 
-export default function CollectionsPage() {
+function ProductDetailPage() {
   return (
     <div>
       <Header/>
-      <div>
-        <ProductCard/>
-      </div>
-      
+      <ProductDetail/>
       <Footer/>
     </div>
   )
 }
+
+export default ProductDetailPage

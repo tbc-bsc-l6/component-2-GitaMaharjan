@@ -130,7 +130,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
         $emailToken = User::where('email', $request->email)->where('usertype', "admin")->first();
-        if($emailToken && User::where('password', $request->password)){
+        if($emailToken && User::where(['password'=> $request->password,'email'=> $request->email])->first()){
             $Usertable = User::where('email', $request->email)->first();
             $id = $Usertable->id;
         $token = $emailToken->createToken($request->email)->plainTextToken;

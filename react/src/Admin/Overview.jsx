@@ -33,7 +33,7 @@ const Overview = ({outlet}) => {
    const signOut = ()=>{
       localStorage.setItem("loginItem", "");
       dispatch(logoutUserAdmin({fullname: "", email: "", token: "", image: "", type: ""}))
-      nav("/adminloginpage");
+      nav("/adminlogin");
    }
 
   return (

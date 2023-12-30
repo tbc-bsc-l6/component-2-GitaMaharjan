@@ -54,6 +54,8 @@ class ProductController extends Controller
         $data = [
             'name' => $request->product_name,
             'image' => "",  // Placeholder for image (you may need to handle image upload separately)
+            // 'image'=>$request->file('image')->store('category_images', 'public'),
+
             'description' => $request->product_description,
             'quantity' => $request->product_quantity,
             'price' => $request->product_price,
@@ -79,6 +81,20 @@ class ProductController extends Controller
         ]);
     }
     
+    
+    // public function addProductImage($filename)
+    // {
+    // $path = storage_path('app/public/category_images/' . $filename);
+
+    // if (!file_exists($path)) {
+    //     abort(404);
+    // }
+
+    // $file = file_get_contents($path);
+
+    // return response($file, 200)->header('Content-Type', 'image/jpeg'); // Adjust the content type based on your image format
+    // }
+
 
     public function addProductImage(Request $request)
     {

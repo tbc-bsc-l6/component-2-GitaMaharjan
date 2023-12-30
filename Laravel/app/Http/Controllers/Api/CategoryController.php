@@ -50,20 +50,56 @@ class CategoryController extends Controller
         }
     }
 
+    // public function getImage($filename)
+    // {
+    //     $path = storage_path('app/public/category_images/' . $filename);
+
+    //     if (!file_exists($path)) {
+    //         abort(404);
+    //     }
+
+    //     $file = file_get_contents($path);
+
+    //     return response($file, 200)->header('Content-Type', 'image/jpeg'); // Adjust the content type based on your image format
+    // }
+
     public function getImage($filename)
-{
-    $path = storage_path('app/public/category_images/' . $filename);
-
-    if (!file_exists($path)) {
-        abort(404);
+    {
+        $path = storage_path('app/public/category_images/' . $filename);
+    
+        if (!file_exists($path)) {
+            // If the file does not exist, return a 404 response
+            return response(['error' => 'Image not found'], 404);
+        }
+    
+        // Get the file extension from the filename
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+    
+        // Map file extensions to corresponding content types
+        $contentTypes = [
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            // Add more formats as needed
+        ];
+    
+        // Check if the file extension is in the content types array
+        if (array_key_exists($extension, $contentTypes)) {
+            // Set the Content-Type header based on the file extension
+            $contentType = $contentTypes[$extension];
+        } else {
+            // If the extension is not recognized, return an error response
+            return response(['error' => 'Invalid image format'], 400);
+        }
+    
+        // Read the file content
+        $file = file_get_contents($path);
+    
+        // Return the response with the appropriate Content-Type header
+        return response($file, 200)->header('Content-Type', $contentType);
     }
-
-    $file = file_get_contents($path);
-
-    return response($file, 200)->header('Content-Type', 'image/jpeg'); // Adjust the content type based on your image format
-}
-
-
+    
 
 
 }

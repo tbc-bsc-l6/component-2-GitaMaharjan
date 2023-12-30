@@ -32,6 +32,10 @@ import CategoryForm from './Admin/CategoryForm';
 import Users from './Admin/Users';
 import ProductCard from './customer/collections/ProductCard';
 import CollectionsPage from './pages/CollectionsPage';
+import ProductDetailPage from './pages/ProductDetailPage';
+import ToHome from './pages/ToHome';
+
+
 // import EditProduct from './Admin/EditProduct'
 
 
@@ -106,7 +110,13 @@ const App = () => {
       <Route path='/aboutus' element={<AboutUsPage/>}/>
       <Route path='/changepassword' element={<ResetPasswordPage/>}></Route>
       <Route path='/userprofile' element={<UserProfilePage/>}/>
-      <Route path="/home/:product_slug" element={<CollectionsPage/>}/>
+      <Route path="/home/:slug" element={<CollectionsPage/>}/>
+      {/* <Route path="/home/:category/:product" element={<ProductDetailPage/>}/> */}
+      <Route path="/" element={<ToHome/>}/>
+
+      <Route path="/productdetail/:id" element={<ProductDetailPage/>}/>
+
+
 
       {/* <Route path='/cir' element={<CircularColor/>}/> */}
       <Route path='/image' element={<StandardImageList/>}/>
