@@ -4,6 +4,7 @@ import Header from '../../common/header/Header';
 import CircularColor from '../../trial/CircularColor';
 import axios from 'axios';
 import { useParams,Link,useNavigate} from 'react-router-dom';
+import NoProductsFound from '../NoProductsFound';
 // import swal from 'sweetalert2'
 
 function ProductCard(props) {
@@ -78,7 +79,7 @@ function ProductCard(props) {
                     </div>
                 )
             })
-        :<h1>No Products</h1>)
+        :<NoProductsFound/>)
         }
     </div>
   )
