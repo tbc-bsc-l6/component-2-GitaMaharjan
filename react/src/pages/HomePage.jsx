@@ -5,6 +5,8 @@ import Footer from '../common/footer/Footer';
 import Header from '../common/header/Header';
 import Newproducts from '../customer/Newproducts';
 import Slider from '../customer/Slider';
+import CategoryBody from '../customer/CategoryBody';
+import StandardImageList from '../trial/StandardImageList';
 
 
 
@@ -14,6 +16,7 @@ const HomePage = () => {
     <div className='font-[poppins] h-screen'>
     <Header/>
     <Slider/>
+    <CategoryBody/>
     {/* <Newproducts/> */}
     <Footer/>
     </div>
