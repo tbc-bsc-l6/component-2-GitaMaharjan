@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\FrontendController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,12 +43,18 @@ Route::resource('users',UserController::class);
 // Route::get('/users',[UserController::class,'getUser']);
 
 
-// PRODUCTS
+// AdminPRODUCTS
 Route::post("/add-products", [ProductController::class, "addProduct"]);
 Route::post("/add-product-images", [ProductController::class, "addProductImage"]);
 Route::post("update-products", [ProductController::class, "updateProduct"]);
 Route::delete("/delete-products/{id}", [ProductController::class, "deleteProduct"]);
 Route::get("/get-products", [ProductController::class, "getProducts"]);
+
+// customerProducts
+Route::get("/fetch-category-products/{slug}",[FrontendController::class,"product"]);
+
+
+
 
 // categories
 Route::get("/get-categories", [CategoryController::class, 'getCategories']);

@@ -30,7 +30,8 @@ import Product from './Admin/Product';
 import ProductForm from './Admin/ProductForm';
 import CategoryForm from './Admin/CategoryForm';
 import Users from './Admin/Users';
-import ProductCard from './customer/ProductCard';
+import ProductCard from './customer/collections/ProductCard';
+import CollectionsPage from './pages/CollectionsPage';
 // import EditProduct from './Admin/EditProduct'
 
 
@@ -105,10 +106,12 @@ const App = () => {
       <Route path='/aboutus' element={<AboutUsPage/>}/>
       <Route path='/changepassword' element={<ResetPasswordPage/>}></Route>
       <Route path='/userprofile' element={<UserProfilePage/>}/>
+      <Route path="/home/:id" element={<CollectionsPage/>}/>
 
       {/* <Route path='/cir' element={<CircularColor/>}/> */}
       <Route path='/image' element={<StandardImageList/>}/>
       <Route path='/banner' element={<Banner/>}/>
+
       {/* <Route path='/new' element={<Newsletter/>}/> */}
       
 

@@ -39,7 +39,7 @@ export default function CategoryBody() {
 
   return (
     <div style={containerStyle}>
-      <ImageList >
+      <ImageList className=' ml-10 mr-10 mb-10 '>
         <ImageListItem key="Subheader" cols={4}>
           <ListSubheader component="div">All Categories</ListSubheader>
         </ImageListItem>
@@ -62,7 +62,9 @@ export default function CategoryBody() {
                     sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                     aria-label={`info about ${category.description}`}
                   >
+                    <Link to={`${category.name}`}>
                     <InfoIcon />
+                    </Link>
                   </IconButton>
                 }
               />
