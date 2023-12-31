@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\FrontendController;
 
 use Illuminate\Http\Request;
@@ -64,3 +65,20 @@ Route::delete("/delete-categories/{id}", [CategoryController::class, "deleteCate
 // Route::post("/get_single_product", [ProductController::class, "get_single_product"]);
 
 // Route::get("product/{id}", [ProductController::class, "get_single_product"]);
+
+
+
+
+
+
+// *************************************cart
+// Route::post("/add-to-cart", [CartController::class, 'addToCart']);
+Route::post("/get_single_product", [CartController::class, "getSingleProduct"]);
+
+Route::post("/add-to-cart", [CartController::class, "addProductToCart"]);
+Route::post("/cart-by-id", [CartController::class, "getProductsFromCartById"]); 
+
+Route::post("/productcounts-cart-id", [CartController::class, "getProductsCountInCartById"]);
+
+Route::delete("/delete-product-cart/{id}", [CartController::class, "deleteCartProductByUser"]);
+Route::put("/updatecart", [CartController::class, "updateCartById"]);

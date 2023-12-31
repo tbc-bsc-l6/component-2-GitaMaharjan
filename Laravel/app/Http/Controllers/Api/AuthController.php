@@ -86,6 +86,7 @@ class AuthController extends Controller
             'status' => 'true',
             'api_token' => $token,
             'fullname' => $user->fullname,
+            "id"=> $user->id,
             'image' => 'static.jpg'
         ], 201);
     } else {
@@ -110,6 +111,7 @@ class AuthController extends Controller
 
             // Return a successful response with user details
             return response([
+                'id'=> $user["id"],
                 'fullname' => $user['fullname'],
                 'email' => $user['email'],
                 'status' => 'true',

@@ -34,6 +34,7 @@ import ProductCard from './customer/collections/ProductCard';
 import CollectionsPage from './pages/CollectionsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ToHome from './pages/ToHome';
+import CartPage from './pages/CartPage';
 
 
 // import EditProduct from './Admin/EditProduct'
@@ -66,7 +67,8 @@ const App = () => {
         const data = axios.post(url, userData, { headers: {
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },}).then((response) => {
-          // console.log("hhahha")
+          console.log(response);
+          
           if(response.data.status==='true'){
             if(response.data.type==='customer'){
               dispatch(loginUser({id: response.data.id, fullname: response.data.fullname, email: response.data.email, token: token, image: response.data.image, type: "customer"}));
@@ -115,6 +117,8 @@ const App = () => {
       <Route path="/" element={<ToHome/>}/>
 
       <Route path="/productdetail/:id" element={<ProductDetailPage/>}/>
+
+      <Route path='/cartpage' element={<CartPage/>} />
 
 
 

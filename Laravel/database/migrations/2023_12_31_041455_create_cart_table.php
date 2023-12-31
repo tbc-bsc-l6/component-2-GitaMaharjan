@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tempcart', function (Blueprint $table) {
+        Schema::create('cart', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id");
-            $table->longText("cookie_string");
             $table->integer("quantity");
             $table->integer("product_id");
             $table->timestamps();
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tempcart');
+        Schema::dropIfExists('cart');
     }
 };

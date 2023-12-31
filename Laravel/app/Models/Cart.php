@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tempcart extends Model
+class Cart extends Model
 {
     use HasFactory;
-    protected $table = 'tempcart';
+    protected $table = 'cart';
     protected $fillable = [
-        'user_id', 'cookie_string', 'quantity', 'product_id'
+        'user_id', 'quantity', 'product_id'
     ];
     public function cartProducts(){
         return $this->belongsTo('App\Models\Product', "product_id", "id");
