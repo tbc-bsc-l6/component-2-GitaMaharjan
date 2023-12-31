@@ -76,6 +76,32 @@ class CartController extends Controller
         }
     }
 
+ // Get the number of products in the cart for a specific user by user ID
+ public function getProductsCountInCartById(Request $request){
+    $userId = $request->id;
+    $productsCount = count(Cart::where('user_id', $userId)->get());
+    return response(['num' => $productsCount]);
+}
+
+
+
+public function getProductsFromCartById(Request $request){
+    $userId = $request->id;
+
+    // Retrieve all products in the cart for the given user ID
+    $products = Cart::where('user_id', $userId)->get();
+    $cartProducts = $products->toArray();  // Convert the collection to an array
+    $productDetails = array();
+    $categoryDetails = array();
+
+    // Iterate through each product in the cart to gather detailed information
+    foreach($products as $key => $product){
+        $productDetails[$key] = $product->cartProducts->toArray();  // Product details
+        $categoryDetails[$key] = $product->cartProducts->get_category->toArray();  // Category details
+    }
+    
+    return response(['product'=> $productDetails, 'cart_pr'=> $cartProducts, 'category'=> $categoryDetails]);
+}
 
 
    
