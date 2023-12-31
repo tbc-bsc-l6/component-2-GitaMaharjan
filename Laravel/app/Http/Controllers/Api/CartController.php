@@ -38,7 +38,6 @@ class CartController extends Controller
             ]);
         }
     }
-
     public function isProductInCart($userId, $productId){
         $cartEntry = Cart::where(['user_id' => $userId, 'product_id' => $productId])->get();
         return count($cartEntry) > 0;
@@ -76,33 +75,50 @@ class CartController extends Controller
         }
     }
 
- // Get the number of products in the cart for a specific user by user ID
- public function getProductsCountInCartById(Request $request){
-    $userId = $request->id;
-    $productsCount = count(Cart::where('user_id', $userId)->get());
-    return response(['num' => $productsCount]);
-}
-
-
-
-public function getProductsFromCartById(Request $request){
-    $userId = $request->id;
-
-    // Retrieve all products in the cart for the given user ID
-    $products = Cart::where('user_id', $userId)->get();
-    $cartProducts = $products->toArray();  // Convert the collection to an array
-    $productDetails = array();
-    $categoryDetails = array();
-
-    // Iterate through each product in the cart to gather detailed information
-    foreach($products as $key => $product){
-        $productDetails[$key] = $product->cartProducts->toArray();  // Product details
-        $categoryDetails[$key] = $product->cartProducts->get_category->toArray();  // Category details
+    // Get the number of products in the cart for a specific user by user ID
+    public function getProductsCountInCartById(Request $request){
+        $userId = $request->id;
+        $productsCount = count(Cart::where('user_id', $userId)->get());
+        return response(['num' => $productsCount]);
     }
-    
-    return response(['product'=> $productDetails, 'cart_pr'=> $cartProducts, 'category'=> $categoryDetails]);
-}
-
 
    
+
+    public function getProductsFromCartById(Request $request){
+        $userId = $request->id;
+    
+        // Retrieve all products in the cart for the given user ID
+        $products = Cart::where('user_id', $userId)->get();
+        $cartProducts = $products->toArray();  // Convert the collection to an array
+        $productDetails = array();
+        $categoryDetails = array();
+    
+        // Iterate through each product in the cart to gather detailed information
+        foreach($products as $key => $product){
+            $productDetails[$key] = $product->cartProducts->toArray();  // Product details
+            $categoryDetails[$key] = $product->cartProducts->get_category->toArray();  // Category details
+        }
+        
+        return response(['product'=> $productDetails, 'cart_pr'=> $cartProducts, 'category'=> $categoryDetails]);
+    }
+
+    // Delete a specific cart product by its ID and return the deletion status
+    public function deleteCartProductByUser(Request $request, $id){
+        $result = Cart::where('id', $id)->delete();
+        return response(['status'=> $result]);
+    }
+   
+
+    // Update the quantity of a cart product by its ID and return the update status
+
+    public function updateCartById(Request $request){
+        $cartId = $request->id;
+        $quantity = $request->quant;
+        
+        // Update the quantity of the cart product by ID
+        $result = Cart::where("id", $cartId)->update(['quantity' => $quantity]);
+        
+        // Return the response with the update status
+        return response(['status' => true]);   
+    }
 }
