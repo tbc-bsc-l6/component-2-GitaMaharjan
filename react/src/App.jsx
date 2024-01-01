@@ -35,6 +35,7 @@ import CollectionsPage from './pages/CollectionsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ToHome from './pages/ToHome';
 import CartPage from './pages/CartPage';
+import TrialCartProduct from './customer/TrialCartProduct';
 
 
 // import EditProduct from './Admin/EditProduct'
@@ -160,6 +161,7 @@ const App = () => {
 {/* **************************************************************************************** */}
 
 
+<Route path='/trial' element={<TrialCartProduct/>}/>
 
     </Routes>
 }
