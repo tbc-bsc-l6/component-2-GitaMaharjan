@@ -1,204 +1,217 @@
-// /* eslint-disable react/jsx-key */
-// import axios from "axios";
-// import React, { useEffect, useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { add_cart_item, delete_cart_item } from "../authentication/CartSlice";
-// import { useNavigate, Link, useLocation } from "react-router-dom";
-// import CartProduct from "./CartProduct";
+import React, { useEffect, useState } from "react";
+import { Navigate, Link, useParams } from "react-router-dom";
+import axios from "axios";
+import Loader from "./Loader";
+// import "./order.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import { useSelector } from "react-redux";
 
-// // function makeObjectsUnique(arr, property) {
-// //   const uniqueValues = new Set();
-// //   return arr.filter((obj) => {
-// //     if (!uniqueValues.has(obj[property])) {
-// //       uniqueValues.add(obj[property]);
-// //       return true;
-// //     }
-// //     return false;
-// //   });
-// // }
+const Order = () => {
+  const [loader, setLoader] = useState(true);
+  const [orders, setOrders] = useState();
+  const [items, setItems] = useState([]);
+  const [cat, setCat] = useState([]);
+  const [pro, setPro] = useState([]);
+  const { id } = useParams();
+  console.log(id);
+  useEffect(() => {
+    axios.get("http://127.0.0.1:8000/api/get-orders/" + id).then((response) => {
+      console.log(response);
+      setOrders(response.data.orders[0]);
+      setPro(response.data.items);
+      setItems(response.data.order_item);
+      setCat(response.data.cat);
+      setLoader(false);
+    });
+  }, []);
+  console.log(orders);
+  let subTotal = 0;
+  let discountTotal = 0;
+  const userDetail = useSelector((state) => {
+    return state.authReducer.signin[0];
+  });
+  console.log(userDetail);
+  return id === undefined ? (
+    <Navigate to="/" />
+  ) : loader === true ? (
+    <Loader />
+  ) : (
+    <div className="flex justify-center items-center h-screen bg-gray-200">
+      <div>
+        <div className="flex items-center justify-center">
+          <div className="text-center font-bold">Goasis</div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <span className="text-sm text-gray-600 align-middle">To:</span>
+              <span className="text-600 text-110 text-blue-500 align-middle">
+                {userDetail.fullname}
+              </span>
+            </div>
+            <div className="text-grey-m2">
+              {/* <div className="my-1">Street, City</div>
+              <div className="my-1">State, Country</div>
+              <div className="my-1">
+                <i className="fa fa-phone fa-flip-horizontal text-secondary"></i>{" "}
+                <b className="text-600">111-111-111</b>
+              </div> */}
+            </div>
+          </div>
 
-// function makeObjectsUnique(arr, property) {
-//   const uniqueValues = new Set();
-//   return arr.reduce((uniqueObjects, obj) => {
-//     if (!uniqueValues.has(obj[property])) {
-//       uniqueValues.add(obj[property]);
-//       uniqueObjects.push(obj);
-//     }
-//     return uniqueObjects;
-//   }, []);
-// }
+          <div className="text-95 sm:col-span-6 self-start sm:flex justify-end">
+            <hr className="sm:hidden" />
+            <div className="text-gray-600">
+              <div className="mt-1 mb-2 text-secondary-500 text-600 text-125">
+                Invoice
+              </div>
 
-// const Order = () => {
-//   const [orderModal, setOrderModal] = useState(false);
-//   const [orderValue, setOrderValue] = useState({
-//     address: "",
-//     date: "",
-//     remarks: "",
-//   });
-//   const changeOrderValue = (e) => {
-//     setOrderValue({ ...orderValue, [e.target.name]: e.target.value });
-//   };
-//   const changeOrderDetail = () => {
-//     setOrderModal(!orderModal);
-//   };
-//   const [cartList, setCartList] = useState([]);
-//   const cartInfo = (quant, id) => {
-//     let arr = [{ quant: quant, id: id }, ...cartList];
-//     setCartList((prev) => makeObjectsUnique(arr, "id"));
-//   };
+              <div className="my-2">
+                <i className="fas fa-circle text-blue-500 text-xs mr-1"></i>{" "}
+                <span className="font-semibold text-90">ID:</span>#
+                {orders.order_no}
+              </div>
 
-//   const nav = useNavigate();
-//   const userLogin = useSelector((state) => {
-//     return state.authReducer.signin[0];
-//   });
-//   console.log(userLogin);
+              <div className="my-2">
+                <i className="fas fa-circle text-blue-500 text-xs mr-1"></i>{" "}
+                <span className="font-semibold text-90">Delivery Date:</span>{" "}
+                {orders.delivery_date}
+              </div>
+            </div>
+          </div>
+        </div>
 
-//   const placeOrder = (e) => {
-//     e.preventDefault();
-//     if (
-//       orderValue.address != "" &&
-//       orderValue.remarks != "" &&
-//       orderValue.date != ""
-//     ) {
-//       cartList.forEach(({ quantity, id }) => {
-//         axios
-//           .put("http://127.0.0.1:8000/api/updatecart", {
-//             quant: quantity,
-//             id: id,
-//           })
-//           .then((response) => {});
-//       });
-//       axios
-//         .post("http://127.0.0.1:8000/api/add_products_to_order", {
-//           address: orderValue.address,
-//           date: orderValue.date,
-//           remarks: orderValue.remarks,
-//           login: userLogin.id,
-//         })
-//         .then((response) => {
-//           let value = response.data.order_id;
+        <div className="mt-4">
+          <div className="row border-b-2 brc-default-l2"></div>
 
-//           nav("/orderpage/" + value);
-//         });
-//     }
-//   };
-//   return (
-//     <>
-//       <div>
-//         <div className="w-100">
-//           <div
-//             onClick={(e) => changeOrderDetail(e)}
-//             className={`${
-//               orderModal == false ? "hidden" : "block"
-//             } w-screen top-0 left-0 fixed h-screen z-20 inset-0 bg-gray-500 bg-opacity-75 transition-opacity`}
-//           ></div>
-//           <div
-//             id="authentication-modal"
-//             tabIndex="-1"
-//             aria-hidden="true"
-//             className={`${
-//               orderModal ? "block" : "hidden"
-//             } overflow-y-auto overflow-x-hidden left-[-0.5%] fixed md:top-[20%] md:left-[35%] md:translate-x-[0%] md:translate-y-[0%] z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}
-//           >
-//             <div className="relative p-4 w-full max-w-md max-h-full">
-//               <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-//                 <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-//                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-//                     Add Order Details
-//                   </h3>
-//                   <button
-//                     onClick={(e) => changeOrderDetail(e)}
-//                     type="button"
-//                     className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-//                     data-modal-hide="authentication-modal"
-//                   >
-//                     <svg
-//                       className="w-3 h-3"
-//                       aria-hidden="true"
-//                       xmlns="http://www.w3.org/2000/svg"
-//                       fill="none"
-//                       viewBox="0 0 14 14"
-//                     >
-//                       <path
-//                         stroke="currentColor"
-//                         strokeLinecap="round"
-//                         strokeLinejoin="round"
-//                         strokeWidth="2"
-//                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-//                       />
-//                     </svg>
-//                     <span className="sr-only">Close modal</span>
-//                   </button>
-//                 </div>
-//                 <div className="p-4 md:p-5">
-//                   <form className="space-y-4" action="#">
-//                     <div>
-//                       <label
-//                         htmlFor="cadd"
-//                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-//                       >
-//                         Order Address
-//                       </label>
-//                       <input
-//                         value={orderValue.address}
-//                         onChange={(e) => changeOrderValue(e)}
-//                         type="text"
-//                         name="address"
-//                         id="cadd"
-//                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-//                         required
-//                       />
-//                     </div>
-//                     <div>
-//                       <label
-//                         htmlFor="cdate"
-//                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-//                       >
-//                         Delivery date
-//                       </label>
-//                       <input
-//                         value={orderValue.date}
-//                         onChange={(e) => changeOrderValue(e)}
-//                         type="date"
-//                         name="date"
-//                         id="cdate"
-//                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-//                         required
-//                       />
-//                     </div>
-//                     <div>
-//                       <label
-//                         htmlFor="cname"
-//                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-//                       >
-//                         Remarks
-//                       </label>
-//                       <input
-//                         value={orderValue.remarks}
-//                         onChange={(e) => changeOrderValue(e)}
-//                         type="text"
-//                         name="remarks"
-//                         id="cname"
-//                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-//                         required
-//                       />
-//                     </div>
-//                     <button
-//                       onClick={(e) => placeOrder(e)}
-//                       type="submit"
-//                       className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-//                     >
-//                       Place Order
-//                     </button>
-//                   </form>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
+          <div className="table-responsive">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr className="text-black">
+                  <th className=" px-6 py-3  opacity-2">S.N</th>
+                  <th scope="col" className="px-6 py-3">
+                    Name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Category
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Qty
+                  </th>
+                  <th scope="col" className="px-6 py-3" width="150">
+                    Unit Price(Rs)
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Discount(Rs)
+                  </th>
+                  <th scope="col" className="px-6 py-3" width="140">
+                    Amount(Rs)
+                  </th>
+                </tr>
+              </thead>
 
-// export default Order;
+              <tbody className="text-95 text-secondary-d3">
+                {pro.map((item, i) => {
+                  subTotal += item.price;
+                  let discountedPrice =
+                    item.price - (item.price * item.discount_id) / 100;
+                  discountTotal += (item.price * item.discount_id) / 100;
+                  return (
+                    <tr
+                      key={id}
+                      className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                    >
+                      <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {i + 1}
+                      </td>
+                      <td
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        {item.name}
+                      </td>
+                      <td className="px-6 py-4"> {cat[i]}</td>
+                      <td className="px-6 py-4 text-95">
+                        {" "}
+                        {items[i].quantity}
+                      </td>
+                      <td className=" px-6 py-4  text-secondary-d2">
+                        {" "}
+                        {item.price}
+                      </td>
+                      <td className="px-6 py-4  text-secondary-d2">
+                        {" "}
+                        {item.discount_id}{" "}
+                      </td>
+                      <td className="px-6 py-4  text-secondary-d2">
+                        {" "}
+                        {discountedPrice}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div className="flex flex-col sm:flex-row mt-16">
+            <div className="sm:w-7/12 text-grey-d2 text-base mt-2 sm:mt-0"></div>
+
+            <div className="sm:w-5/12 text-gray-600 text-90 order-first sm:order-last space-y-4">
+              <div className="flex justify-between items-center w-full">
+                <p className="text-base dark:text-white leading-4 text-gray-800">
+                  SubTotal:
+                </p>
+                <p className="text-base dark:text-gray-300 leading-4 text-gray-600">
+                  Rs. {subTotal}
+                </p>
+              </div>
+
+              <div className="flex justify-between items-center w-full">
+                <p className="text-base dark:text-white leading-4 text-gray-800">
+                  Discount Amount:
+                </p>
+                <p className="text-base dark:text-gray-300 leading-4 text-gray-600">
+                  -{discountTotal}
+                </p>
+              </div>
+
+              <div className="flex items-center bg-blue-200 p-5 my-10">
+                <div className="flex justify-between items-center w-full">
+                  <p className="text-base dark:text-white leading-4 text-gray-800">
+                    Total Amount
+                  </p>
+
+                  <p className="text-base dark:text-gray-300 leading-4 text-gray-600">
+                    Rs. {subTotal - discountTotal}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+
+          <div className="flex justify-between mt-16">
+            <div className="flex-shrink-0">
+              <span className="text-secondary-d1 text-105">
+                Thank you for your order
+              </span>
+            </div>
+            <div className="flex-shrink-0">
+              {/* <div className="flex items-center bg-blue-200 p-5 my-10"> */}
+              <Link
+                to=""
+                className="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0"
+              >
+                Pay Now
+              </Link>
+              {/* </div> */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Order;

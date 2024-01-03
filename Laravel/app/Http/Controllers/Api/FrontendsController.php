@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class FrontendController extends Controller
+class FrontendsController extends Controller
 {
     // public function product($slug){
     //     $category=Category::where('name',$slug)->where('status','0')->first();
@@ -71,7 +71,7 @@ class FrontendController extends Controller
         }
     }
 
-        public function get_single_product(Request $request){
+        public function getSingleProduct(Request $request){
             $id = $request->id;
             $arr = Product::find($id)->toArray();
             $category = Product::find($id)->get_category->toArray();

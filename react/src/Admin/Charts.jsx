@@ -1,14 +1,7 @@
-import {Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const Charts = () => {
-  return (
-    <>
+  return <>This is charts</>;
+};
 
-   <Link to="/dashboard/products">View Products</Link>
-   <Link to="/dashboard/product-form"> Products</Link>
-
-    </>
-  )
-}
-
-export default Charts
+export default Charts;

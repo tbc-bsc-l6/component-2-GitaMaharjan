@@ -29,13 +29,12 @@ import Product from "./Admin/Product";
 import ProductForm from "./Admin/ProductForm";
 import CategoryForm from "./Admin/CategoryForm";
 import Users from "./Admin/Users";
-import ProductCard from "./customer/collections/ProductCard";
 import CollectionsPage from "./pages/CollectionsPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ToHome from "./pages/ToHome";
 import CartPage from "./pages/CartPage";
-import TrialCartProduct from "./customer/TrialCartProduct";
-// import OrderPage from "./pages/OrderPage";
+import OrderPage from "./pages/OrderPage";
+import OrdersList from "./Admin/OrdersList";
 
 // import EditProduct from './Admin/EditProduct'
 
@@ -128,21 +127,22 @@ const App = () => {
           <Route path="/home/:slug" element={<CollectionsPage />} />
           {/* <Route path="/home/:category/:product" element={<ProductDetailPage/>}/> */}
           <Route path="/" element={<ToHome />} />
+          {/* <Route path="/orderpage/:id" element={<OrderPage />} /> */}
 
           <Route path="/productdetail/:id" element={<ProductDetailPage />} />
 
           <Route path="/cartpage" element={<CartPage />} />
-          {/* <Route path="/orderpage" element={<OrderPage />} /> */}
+          <Route path="/orderpage/:id" element={<OrderPage />} />
 
           {/* <Route path='/cir' element={<CircularColor/>}/> */}
           {/* <Route path='/image' element={<StandardImageList/>}/>
-      <Route path='/banner' element={<Banner/>}/> */}
+          <Route path='/banner' element={<Banner/>}/> */}
 
           {/* <Route path='/new' element={<Newsletter/>}/> */}
 
           {/* <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route index element={<OverviewPage/>}/>
-        <Route path='products' element={<ProductPage/>}/>
+          <Route index element={<OverviewPage/>}/>
+          <Route path='products' element={<ProductPage/>}/>
       <Route/>
       <Route path='/admin' element={<LoginPage/>}/> */}
 
@@ -156,15 +156,17 @@ const App = () => {
             <Route path="category-form" element={<CategoryForm />} />
             {/* <Route path='edit_product/:id' element={<EditProduct/>}/> */}
 
-            <Route path="users" element={<Users />} />
-          </Route>
-          <Route path="adminlogin" element={<LoginAdmin />} />
+            <Route path="orderlist" element={<OrdersList />} />
 
-          <Route path="/pro" element={<ProductCard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="charts" element={<Charts />} />
+          </Route>
+
+          <Route path="adminlogin" element={<LoginAdmin />} />
 
           {/* **************************************************************************************** */}
 
-          <Route path="/trial" element={<TrialCartProduct />} />
+          {/* <Route path="/trial" element={<TrialCartProduct />} /> */}
         </Routes>
       )}
     </>

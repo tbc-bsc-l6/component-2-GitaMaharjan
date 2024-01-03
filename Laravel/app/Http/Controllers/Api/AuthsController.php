@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class AuthsController extends Controller
 {
 
     public function index()

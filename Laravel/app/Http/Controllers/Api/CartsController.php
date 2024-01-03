@@ -9,7 +9,9 @@ use App\Models\Product;
 use App\Models\Cart;
 
 
-class CartController extends Controller
+
+
+class CartsController extends Controller
 {
     public function getSingleProduct(Request $request){
         $productId = $request->id;
@@ -121,4 +123,6 @@ class CartController extends Controller
         // Return the response with the update status
         return response(['status' => true]);   
     }
+
+    
 }
