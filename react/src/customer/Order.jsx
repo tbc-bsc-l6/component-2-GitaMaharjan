@@ -49,6 +49,14 @@ const Order = () => {
                 {userDetail.fullname}
               </span>
             </div>
+            <div>
+              <span className="text-sm text-gray-600 align-middle">
+                Number:
+              </span>
+              <span className="text-600 text-110 text-blue-500 align-middle">
+                {orders.number}
+              </span>
+            </div>
             <div className="text-grey-m2">
               {/* <div className="my-1">Street, City</div>
               <div className="my-1">State, Country</div>
@@ -62,13 +70,9 @@ const Order = () => {
           <div className="text-95 sm:col-span-6 self-start sm:flex justify-end">
             <hr className="sm:hidden" />
             <div className="text-gray-600">
-              <div className="mt-1 mb-2 text-secondary-500 text-600 text-125">
-                Invoice
-              </div>
-
               <div className="my-2">
                 <i className="fas fa-circle text-blue-500 text-xs mr-1"></i>{" "}
-                <span className="font-semibold text-90">ID:</span>#
+                <span className="font-semibold text-90">Invoice ID:</span>#
                 {orders.order_no}
               </div>
 

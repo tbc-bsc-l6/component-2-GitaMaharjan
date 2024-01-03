@@ -53,18 +53,19 @@ function setProductsForCart(newProduct, cartProduct, categories) {
 }
 
 const Cart = () => {
-  const [orderModal, setOrderModal] = useState(false);
-  const [orderValue, setOrderValue] = useState({
-    address: "",
-    date: "",
-    remarks: "",
-  });
-  const changeOrderValue = (e) => {
-    setOrderValue({ ...orderValue, [e.target.name]: e.target.value });
-  };
-  const changeOrderDetail = () => {
-    setOrderModal(!orderModal);
-  };
+  // const [orderModal, setOrderModal] = useState(false);
+  // const [orderValue, setOrderValue] = useState({
+  //   address: "",
+  //   date: "",
+  //   remarks: "",
+  //   number: "",
+  // });
+  // const changeOrderValue = (e) => {
+  //   setOrderValue({ ...orderValue, [e.target.name]: e.target.value });
+  // };
+  // const changeOrderDetail = () => {
+  //   setOrderModal(!orderModal);
+  // };
   const [deleteStatus, setDeletedStatus] = useState("");
   const [cartList, setCartList] = useState([]);
   const cartInfo = (quant, id) => {
@@ -116,50 +117,54 @@ const Cart = () => {
     if (userLogin.id === "") {
       nav("/signin");
     } else {
-      setOrderModal(true);
+      nav("/orderdetails");
+      // setOrderModal(true);
     }
   };
-  const placeOrder = (e) => {
-    e.preventDefault();
-    if (
-      orderValue.address != "" &&
-      orderValue.remarks != "" &&
-      orderValue.date != ""
-    ) {
-      cartList.forEach(({ quant, id }) => {
-        axios
-          .put("http://127.0.0.1:8000/api/updatecart", {
-            quant: quant,
-            id: id,
-          })
-          .then((response) => {});
-      });
-      axios
-        .post("http://127.0.0.1:8000/api/add-to-order", {
-          address: orderValue.address,
-          date: orderValue.date,
-          remarks: orderValue.remarks,
-          login: userLogin.id,
-        })
-        .then((response) => {
-          let value = response.data.order_id;
+  // const placeOrder = (e) => {
+  //   e.preventDefault();
+  //   if (
+  //     orderValue.address != "" &&
+  //     orderValue.remarks != "" &&
+  //     orderValue.date != "" &&
+  //     orderValue.number != ""
+  //   ) {
+  //     cartList.forEach(({ quant, id }) => {
+  //       axios
+  //         .put("http://127.0.0.1:8000/api/updatecart", {
+  //           quant: quant,
+  //           id: id,
+  //         })
+  //         .then((response) => {});
+  //     });
+  //     axios
+  //       .post("http://127.0.0.1:8000/api/add-to-order", {
+  //         address: orderValue.address,
+  //         date: orderValue.date,
+  //         remarks: orderValue.remarks,
+  //         number: orderValue.number,
 
-          nav("/orderpage/" + value);
-        });
-    }
-  };
+  //         login: userLogin.id,
+  //       })
+  //       .then((response) => {
+  //         let value = response.data.order_id;
+
+  //         nav("/orderpage/" + value);
+  //       });
+  //   }
+  // };
 
   return (
     <>
       <div>
         <div className="w-100">
-          <div
+          {/* <div
             onClick={(e) => changeOrderDetail(e)}
             className={`${
               orderModal == false ? "hidden" : "block"
             } w-screen top-0 left-0 fixed h-screen z-20 inset-0 bg-gray-500 bg-opacity-75 transition-opacity`}
-          ></div>
-          <div
+          ></div> */}
+          {/* <div
             id="authentication-modal"
             tabIndex="-1"
             aria-hidden="true"
@@ -250,6 +255,23 @@ const Cart = () => {
                         required
                       />
                     </div>
+                    <div>
+                      <label
+                        htmlFor="cnum"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Phone Number
+                      </label>
+                      <input
+                        value={orderValue.number}
+                        onChange={(e) => changeOrderValue(e)}
+                        type="text"
+                        name="number"
+                        id="cname"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        required
+                      />
+                    </div>
                     <button
                       onClick={(e) => placeOrder(e)}
                       type="submit"
@@ -261,7 +283,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* *********** */}
 
           <div className="items-center py-24 bg-pink font-poppins dark:bg-gray-700">
@@ -308,7 +330,7 @@ const Cart = () => {
                   </div>
                   <div className="mt-6 w-full">
                     <Link
-                      to="/orderpage"
+                      // to="/orderpage"
                       onClick={(e) => goToCheckout(e)}
                       className="w-full md:w-[70%] flex items-center justify-center rounded-md bg-gradient-to-r from-pink-300 to-pink-400 hover:opacity-90 text-white px-6 py-3 text-lg font-medium shadow-md mb-4"
                     >

@@ -35,6 +35,8 @@ import ToHome from "./pages/ToHome";
 import CartPage from "./pages/CartPage";
 import OrderPage from "./pages/OrderPage";
 import OrdersList from "./Admin/OrdersList";
+import OrderDetails from "./customer/OrderDetails";
+import OrderDetailPage from "./pages/OrderDetailPage";
 
 // import EditProduct from './Admin/EditProduct'
 
@@ -132,6 +134,8 @@ const App = () => {
           <Route path="/productdetail/:id" element={<ProductDetailPage />} />
 
           <Route path="/cartpage" element={<CartPage />} />
+          <Route path="/orderdetails" element={<OrderDetailPage />} />
+
           <Route path="/orderpage/:id" element={<OrderPage />} />
 
           {/* <Route path='/cir' element={<CircularColor/>}/> */}

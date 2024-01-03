@@ -55,6 +55,15 @@ const OrdersList = () => {
                 <th scope="col" className="px-6 py-3">
                   Income
                 </th>
+                <th scope="col" className="px-6 py-3">
+                  Delivery Address
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Phone Number
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Recipient Name
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -98,6 +107,15 @@ const OrdersList = () => {
                       {orderDetails[id].products.price *
                         orderDetails[id].products.quantity -
                         orderDetails[id].products.discount_id / 100}
+                    </td>
+                    <td className="px-6 py-4">
+                      {orderDetails[id].order_Main.address}
+                    </td>
+                    <td className="px-6 py-4">
+                      {orderDetails[id].order_Main.number}
+                    </td>
+                    <td className="px-6 py-4">
+                      {orderDetails[id].order_Main.name}
                     </td>
                   </tr>
                 );

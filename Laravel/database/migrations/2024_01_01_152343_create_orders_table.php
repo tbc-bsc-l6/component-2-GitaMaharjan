@@ -19,6 +19,10 @@ return new class extends Migration
             $table->longText("order_no");
             $table->date("delivery_date");
             $table->text("remarks");
+            $table->integer("number");
+            $table->text("name");
+
+
         });
     }
 
