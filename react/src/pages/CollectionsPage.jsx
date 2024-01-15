@@ -1,17 +1,22 @@
-import React from 'react'
-import Header from '../common/header/Header'
-import ProductCard from '../customer/collections/ProductCard'
-import Footer from '../common/footer/Footer'
+import React from "react";
+import Header from "../common/header/Header";
+import ProductCard from "../customer/collections/ProductCard";
+import Footer from "../common/footer/Footer";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function CollectionsPage() {
+function CollectionsPage() {
   return (
     <div>
-      <Header/>
+      <Header />
+
       <div>
-        <ProductCard/>
+        <ProductCard />
       </div>
-      
-      <Footer/>
+
+      <Footer />
     </div>
-  )
+  );
 }
+
+export default CollectionsPage;

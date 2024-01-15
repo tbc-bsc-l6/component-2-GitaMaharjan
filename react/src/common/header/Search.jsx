@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,18 @@ import "./Header.css";
 import axios from "axios";
 
 const Search = () => {
+  const nav = useNavigate();
+  const [search, setSearch] = useState("");
+  const changeTerm = (e) => {
+    setSearch(e.target.value);
+  };
+  function searchItem(e) {
+    if (e.key === "Enter") {
+      nav(`/search/` + search);
+    }
+  }
+
+  /**************************** */
   const [hide, setHide] = useState(false);
 
   const [quantity, setQuantity] = useState(0);
@@ -33,6 +45,7 @@ const Search = () => {
         });
     }
   }, [userLogin.id, cartItems]);
+  /**************************** */
 
   return (
     <>
@@ -41,12 +54,21 @@ const Search = () => {
           <Link to="/home" className="logo width ">
             <img src={logo} alt="" />
           </Link>
-
+          {/*  */}
           <div className="search-box f_flex">
             <FaSearch className="icon" />
-            <input type="text" placeholder="Search and hit enter..." />
+            <input
+              value={search}
+              onChange={(e) => {
+                changeTerm(e);
+              }}
+              onKeyUp={(e) => searchItem(e)}
+              type="text"
+              placeholder="Search and hit enter..."
+            />
             <span>All Category</span>
           </div>
+          {/*  */}
 
           <div className="flex flex-row justify-between md:gap-[1.5em] gap-[1em] items-center">
             {userLogin.token === "" ? (

@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\CartsController;
 use App\Http\Controllers\Api\FrontendsController;
 use App\Http\Controllers\Api\OrdersController;
+use App\Http\Controllers\Api\FiltersController;
+
 
 
 use Illuminate\Http\Request;
@@ -49,7 +51,7 @@ Route::resource('users',UsersController::class);
 // AdminPRODUCTS
 Route::post("/add-products", [ProductsController::class, "addProduct"]);
 Route::post("/add-product-images", [ProductsController::class, "addProductImage"]);
-Route::post("update-products", [ProductsController::class, "updateProduct"]);
+Route::post("/update-products", [ProductsController::class, "updateProduct"]);
 Route::delete("/delete-products/{id}", [ProductsController::class, "deleteProduct"]);
 Route::get("/get-products", [ProductsController::class, "getProducts"]);
 
@@ -96,3 +98,8 @@ Route::get("/get-orders/{id}", [OrdersController::class, "getOrders"]);
 Route::get("/get-total-orders/{id}", [OrdersController::class, "getTotalOrders"]);
 
 Route::get("/get-order-admin", [OrdersController::class, "getOrdersForAdmin"]);
+
+
+Route::post("/get_filter_products", [FiltersController::class, "get_filter_products"]);
+
+Route::post("/get_searched_product", [FiltersController::class, "get_searched_products"]);

@@ -35,10 +35,10 @@ import ToHome from "./pages/ToHome";
 import CartPage from "./pages/CartPage";
 import OrderPage from "./pages/OrderPage";
 import OrdersList from "./Admin/OrdersList";
-import OrderDetails from "./customer/OrderDetails";
 import OrderDetailPage from "./pages/OrderDetailPage";
 
-// import EditProduct from './Admin/EditProduct'
+import EditProduct from "./Admin/EditProduct";
+import Search from "./customer/Search";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -127,22 +127,15 @@ const App = () => {
           <Route path="/changepassword" element={<ResetPasswordPage />}></Route>
           <Route path="/userprofile" element={<UserProfilePage />} />
           <Route path="/home/:slug" element={<CollectionsPage />} />
-          {/* <Route path="/home/:category/:product" element={<ProductDetailPage/>}/> */}
           <Route path="/" element={<ToHome />} />
-          {/* <Route path="/orderpage/:id" element={<OrderPage />} /> */}
 
           <Route path="/productdetail/:id" element={<ProductDetailPage />} />
 
           <Route path="/cartpage" element={<CartPage />} />
           <Route path="/orderdetails" element={<OrderDetailPage />} />
+          <Route path="/search/:slug" element={<Search />} />
 
           <Route path="/orderpage/:id" element={<OrderPage />} />
-
-          {/* <Route path='/cir' element={<CircularColor/>}/> */}
-          {/* <Route path='/image' element={<StandardImageList/>}/>
-          <Route path='/banner' element={<Banner/>}/> */}
-
-          {/* <Route path='/new' element={<Newsletter/>}/> */}
 
           {/* <Route path='/dashboard' element={<Dashboard/>}/>
           <Route index element={<OverviewPage/>}/>
@@ -158,7 +151,7 @@ const App = () => {
             <Route path="products" element={<Product />} />
             <Route path="category" element={<Category />} />
             <Route path="category-form" element={<CategoryForm />} />
-            {/* <Route path='edit_product/:id' element={<EditProduct/>}/> */}
+            <Route path="edit_product/:id" element={<EditProduct />} />
 
             <Route path="orderlist" element={<OrdersList />} />
 
@@ -167,10 +160,6 @@ const App = () => {
           </Route>
 
           <Route path="adminlogin" element={<LoginAdmin />} />
-
-          {/* **************************************************************************************** */}
-
-          {/* <Route path="/trial" element={<TrialCartProduct />} /> */}
         </Routes>
       )}
     </>

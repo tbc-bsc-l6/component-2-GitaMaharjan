@@ -9,46 +9,6 @@ use App\Models\Product;
 class ProductsController extends Controller
 {
     
-    // public function addProduct(Request $request)
-    // {
-    //     try {
-    //         $request->validate([
-    //             'name' => 'required',
-    //             'description' => 'required',
-    //             'price' => 'required|numeric',
-    //             'quantity' => 'required|numeric',
-    //             'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048', // Example validation for file upload
-    //         ]);
-    
-    //         $product = new Product;
-    //         $product->name = $request->input('name');
-    //         $product->description = $request->input('description');
-    //         $product->price = $request->input('price');
-    //         $product->quantity = $request->input('quantity');
-    
-    //         // Handle file upload
-    //         if ($request->hasFile('file')) {
-    //             $file = $request->file('file');
-    //             $path = $file->store('products');
-    //             $product->file = $path;
-    //         }
-    
-    //         $product->save();
-    
-    //         return response([
-    //             'status' => true,
-    //             'message' => 'Product added successfully',
-    //             'data' => $product,
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         return response([
-    //             'status' => false,
-    //             'message' => 'Error adding product',
-    //             'error' => $e->getMessage(),
-    //         ], 500);
-    //     }
-    // }
-
     public function addProduct(Request $request){
         // Extracting data from the request
         $data = [
@@ -148,7 +108,9 @@ class ProductsController extends Controller
         $result = Product::where('id', $productId)->update($updatedProductData);
 
         // Check if an image file is provided in the request
-        if ($request->hasFile('product_image')) {
+        // if ($request->hasFile('product_image')) {
+            if($request->product_image != ""){
+
             // Retrieve the 'product_image' file from the request
             $image = $request->file('product_image');
 
@@ -172,17 +134,6 @@ class ProductsController extends Controller
             'status' => true,
         ]);
     }
-
-    // public function getProducts(){
-    //     $arr = Product::orderBy("id", "desc")->get()->toArray();
-    //     $result = [];
-    //     foreach($arr as $key => $ar){
-    //         $result[$key] = $ar;
-    //         $all_pro = Product::find($ar['id'])->get_category->toArray();
-    //         $result[$key]['cat_name'] = $all_pro['name'];
-    //     }
-    //     return response(['arr'=> $result]);
-    // }
 
     public function getProducts()
 {
