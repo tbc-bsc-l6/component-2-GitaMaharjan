@@ -79,19 +79,19 @@ const Overview = ({ outlet }) => {
                   Category
                 </Sidebar.Item>
               </Link>
-              <Sidebar.Item href="/dashboard/users" icon={HiUser}>
-                Users
+              <Sidebar.Item href="/dashboard/customers" icon={HiUser}>
+                Customers
+              </Sidebar.Item>
+              <Sidebar.Item href="/dashboard/users" icon={FaComment}>
+                Administrative Users
               </Sidebar.Item>
               <Link to="/dashboard/orderlist">
                 <Sidebar.Item icon={FaClipboardList}>Orders</Sidebar.Item>
               </Link>
-              {/* <Sidebar.Item href="#" icon={FaComment}>
-                Reviews
-              </Sidebar.Item>
+              <Link to="/dashboard/profile">
+                <Sidebar.Item icon={FaUserCircle}>Profile</Sidebar.Item>
+              </Link>
 
-              <Sidebar.Item href="#" icon={FaUserCircle}>
-                Profile
-              </Sidebar.Item> */}
               <Sidebar.Item href="#" icon={HiArrowSmRight} onClick={signOut}>
                 Sign Out
               </Sidebar.Item>

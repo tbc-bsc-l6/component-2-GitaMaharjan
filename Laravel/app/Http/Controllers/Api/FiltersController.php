@@ -9,10 +9,51 @@ use App\Models\Product;
 
 class FiltersController extends Controller
 {
+    // public function get_filter_products(Request $request){
+    //     $price = $request->price;
+    //     $catID=$request->catID;
+       
+    //     if(Category::where(['name'=> $catID])->first() == null){
+    //          return json_encode([
+    //             'result' => [],
+                
+    //         ]);
+    //     }
+    //     $catid = Category::where(['name'=> $catID])->first()->id;
+        
+
+    //     $query = Product::query();
+    //     if (isset($catID)) {    
+    //         $query->where('category_id', $catid);
+    //     }
+    //     if ($price) {
+    //         $query->where(function ($query) use ($price) {
+    //             foreach ($price as $p) {
+    //                 if($p[0] != "0" && $p[1] != "0")
+    //                     $query->orwhereBetween('price', [$p[0], $p[1]]);
+    //             }
+    //         });
+    //     }
+
+    //     // Get the filtered results
+    //     $results = $query->get();
+    //     $arr = [];
+    //     foreach($results as $key => $result){
+    //         $arr[$key] = $result;
+    //         $arr[$key]['cat_name'] = $result->get_category->toArray()['name'];
+    //     }
+    //     return response([
+    //         'results'=> $arr
+    //     ]);
+        
+    // }
+
     public function get_filter_products(Request $request){
         $price = $request->price;
         $catID=$request->catID;
-       
+        $sort = $request->sortItem;
+
+
         if(Category::where(['name'=> $catID])->first() == null){
              return json_encode([
                 'result' => [],
@@ -33,6 +74,16 @@ class FiltersController extends Controller
                         $query->orwhereBetween('price', [$p[0], $p[1]]);
                 }
             });
+        }
+        if($sort != ""){
+
+            if ($sort == 'newest' || $sort == 'oldest') {
+                $query->orderBy("created_at", $sort == 'newest' ? 'desc' : 'asc');
+            }
+            else{
+                $query->orderBy('id', $sort == 'asc' ? 'asc' : 'desc');
+
+            }
         }
 
         // Get the filtered results

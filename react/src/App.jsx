@@ -28,7 +28,6 @@ import Category from "./Admin/Category";
 import Product from "./Admin/Product";
 import ProductForm from "./Admin/ProductForm";
 import CategoryForm from "./Admin/CategoryForm";
-import Users from "./Admin/Users";
 import CollectionsPage from "./pages/CollectionsPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ToHome from "./pages/ToHome";
@@ -39,6 +38,11 @@ import OrderDetailPage from "./pages/OrderDetailPage";
 
 import EditProduct from "./Admin/EditProduct";
 import Search from "./customer/Search";
+import Customers from "./Admin/Customers";
+import Users from "./Admin/Users";
+import Add_user from "./Admin/Add_user";
+import Edit_user from "./Admin/Edit_user";
+import AdminProfile from "./Admin/AdminProfile";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -64,12 +68,10 @@ const App = () => {
         const data = axios
           .post(url, userData, {
             headers: {
-              // 'Content-Type': 'application/x-www-form-urlencoded',
+              "Content-Type": "application/x-www-form-urlencoded",
             },
           })
           .then((response) => {
-            console.log(response);
-
             if (response.data.status === "true") {
               if (response.data.type === "customer") {
                 dispatch(
@@ -83,7 +85,10 @@ const App = () => {
                   })
                 );
                 setIsLogin(true);
-              } else if (response.data.type === "admin")
+              } else if (
+                response.data.type === "admin" ||
+                response.data.type === "superadmin"
+              )
                 dispatch(
                   loginUser({
                     id: response.data.id,
@@ -91,7 +96,7 @@ const App = () => {
                     email: response.data.email,
                     token: token,
                     image: response.data.image,
-                    type: "admin",
+                    type: response.data.type,
                   })
                 );
             }
@@ -155,8 +160,12 @@ const App = () => {
 
             <Route path="orderlist" element={<OrdersList />} />
 
+            <Route path="customers" element={<Customers />} />
             <Route path="users" element={<Users />} />
+            <Route path="add_user" element={<Add_user />} />
+            <Route path="edit_user/:id" element={<Edit_user />} />
             <Route path="charts" element={<Charts />} />
+            <Route path="profile" element={<AdminProfile />} />
           </Route>
 
           <Route path="adminlogin" element={<LoginAdmin />} />

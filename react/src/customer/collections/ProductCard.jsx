@@ -1,170 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import bed from '../../assets/category/bed/bed1.jpg';
-// import Header from '../../common/header/Header';
-// import CircularColor from '../../trial/CircularColor';
-// import axios from 'axios';
-// import { useParams,Link,useNavigate} from 'react-router-dom';
-// import NoProductsFound from '../NoProductsFound';
-// // import swal from 'sweetalert2'
-
-// function ProductCard(props) {
-//     const {slug } = useParams();
-//     const navigate=useNavigate();
-//     const [loading,setLoading]=useState(true);
-//     const [product,setProduct]=useState([]);
-//     const [category,setCategory]=useState([]);
-//     const productCount=product.length;
-
-//     useEffect(()=>{
-//         let isMounted=true;
-
-//         // const slug=props.match.params.slug;
-
-//         axios.get(`http://127.0.0.1:8000/api/fetch-category-products/${slug}`).then(res=>{
-//             if(isMounted){
-//                 if(res.data.status===200){
-//                     setProduct(res.data.product_data.product);
-//                     setCategory(res.data.product_data.category);
-//                     setLoading(false);
-
-//                 }else if (res.data.status===401){
-//                     // swal("warning",res.data.message,"");
-//                     alert("401 error")
-
-//                 }
-//                 else if (res.data.status===404){
-//                     navigate('/home');
-//                     alert("404 error")
-
-//                     // swal("warning",res.data.message,"error");
-
-//                 }
-//             }
-//         })
-//         return()=>{
-//             isMounted=false;
-//         }
-//     },[navigate,slug])
-
-//   return (
-//     <div>
-//         <div className="2xl:mx-auto 2xl:container mx-4 py-16">
-//             <div className=" w-full  relative flex items-center justify-center">
-//             <img
-//                 src={`http://127.0.0.1:8000/storage/${category.image}`}
-//                 alt="dining"
-//                 className="max-w-full max-h-full w-full h-full absolute z-0 hidden xl:block object-cover"
-//                 />
-
-//                 <div className="bg-gray-800 bg-opacity-60 md:my-16 lg:py-16 py-10 w-full md:mx-24 md:px-12 px-4 flex flex-col items-center justify-center relative z-40">
-//                     <h1 className="text-4xl font-semibold leading-9 text-white text-center">{category.name}</h1>
-//                     <p className="text-base leading-normal text-center text-white mt-6">
-//                         {category.description}
-//                     </p>
-
-//                 </div>
-//             </div>
-//         </div>
-//         {loading ? (
-//         <CircularColor />
-//       ) : productCount > 0 ? (
-//         <div
-//           style={{
-//             display: 'flex',
-//             flexWrap: 'wrap',
-//             justifyContent: 'space-evenly',
-//           }}
-//         >
-//           {product.map((item, id) => {
-//             return (
-//               <div
-//                 key={id}
-//                 style={{
-//                   width: 'calc(33.33% - 20px)',
-//                   marginBottom: '20px',
-//                 }}
-//               >
-//                 <div
-//                   style={{
-//                     backgroundColor: 'pink',
-//                     border: '1px solid #e2e8f0',
-//                     borderRadius: '0.375rem',
-//                     // height:'600px',
-//                     boxShadow:
-//                       '0 0.25rem 0.375rem rgba(0, 0, 0, 0.05), 0 0.125rem 0.25rem rgba(0, 0, 0, 0.04)',
-//                   }}
-//                 >
-//                   <Link to={`/productdetail/${item.id}`}>
-//                     <div style={{height:'600px'}}>
-//                     <img
-//                       style={{
-//                         width: '100%',
-//                         height: '50%',
-//                       }}
-//                       src={`http://127.0.0.1:8000/images/${item.image}`}
-//                       alt={item.name}
-//                     /></div>
-//                   </Link>
-//                   <div style={{ padding: '1rem',  backgroundColor: 'red',
-//  }}>
-//                     <a
-//                       href="#"
-//                       style={{
-//                         color: 'black',
-//                       }}
-//                     >
-//                       <Link to={`/productdetail/${item.id}`}>
-//                         <h5
-//                           style={{
-//                             fontSize: '1.125rem',
-//                             fontWeight: '600',
-//                             lineHeight: '1.75rem',
-//                           }}
-//                         >
-//                           {item.name}
-//                         </h5>
-//                       </Link>
-//                     </a>
-
-//                     <div style={{
-//                         display: 'flex',
-//                         justifyContent: 'space-between',
-//                         marginTop: '0.75rem',
-//                       }}
-//                     >
-//                       <span
-//                         style={{fontSize: '1.125rem',fontWeight: '700',
-//                         }}
-//                       >
-//                         {item.price}
-//                       </span>
-
-//                       <a
-//                         href="#"
-//                         style={{color: '#fff', backgroundColor: '#4a90e2',hoverBackgroundColor: '#3182ce',focusRingColor: '#63b3ed',fontWeight: '500',
-//                         borderRadius: '0.375rem',fontSize: '0.875rem',padding: '0.625rem 1.25rem',textAlign: 'center',darkBackgroundColor: '#2c5282',darkHoverBackgroundColor: '#2c5282',darkFocusRingColor: '#90cdf4',
-//                         }}
-//                       >
-//                         Add to Cart
-//                       </a>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             );
-//           })}
-//         </div>
-//       ) : (
-//         <NoProductsFound />
-//       )}
-//     </div>
-//   );
-// }
-
-// export default ProductCard;
-
-//******************************************************* */
-
 import React, { useEffect, useState } from "react";
 import bed from "../../assets/category/bed/bed1.jpg";
 import Header from "../../common/header/Header";
@@ -182,6 +15,15 @@ function ProductCard(props) {
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
 
+  //******* */
+  const [sortItem, setSortItem] = useState("");
+  const [sortbtn, setSortBtn] = useState(false);
+
+  const sortItems = (e) => {
+    setSortItem(e.target.dataset.sort);
+    setSortBtn(false);
+  };
+  //***** */
   const [newPro, setNewPro] = useState([]);
   const productCount = product?.length != null ? product?.length : 0;
   // const [priceBtn, setPriceBtn] = useState(false);
@@ -235,6 +77,7 @@ function ProductCard(props) {
       .post("http://127.0.0.1:8000/api/get_filter_products", {
         price: priceOption.length > 0 ? priceOption : null,
         catID: slug,
+        sortItem: sortItem,
       })
       .then((response) => {
         console.log(response);
@@ -242,7 +85,7 @@ function ProductCard(props) {
 
         setLoader(false);
       });
-  }, [priceOption.length]);
+  }, [priceOption.length, sortItem]);
 
   // *****************************************************************************
 
@@ -254,6 +97,11 @@ function ProductCard(props) {
         <div className=" w-full  relative flex items-center justify-center">
           <img
             src={`http://127.0.0.1:8000/storage/${category.image}`}
+            // src={
+            //   category.image.includes("https")
+            //     ? `${category.image}`
+            //     : `http://127.0.0.1:8000/storage/${category.image}`
+            // }
             alt="dining"
             className="max-w-full max-h-full w-full h-full absolute z-0 hidden xl:block object-cover"
           />
@@ -268,8 +116,6 @@ function ProductCard(props) {
           </div>
         </div>
       </div>
-      {/* ********************************************************************************* */}
-      {/* ********************************************************************************* */}
 
       <div className="flex">
         <div className="w-1/5" style={{ width: "200px" }}>
@@ -385,6 +231,38 @@ function ProductCard(props) {
             </div>
           </div>
         </div>
+        <div className="flex flex-col items-center">
+          {" "}
+          {/* Updated to flex-col and items-center */}
+          <div className="relative inline-block text-left">
+            <div>Sort</div>
+
+            <div className="py-1" role="none">
+              <a
+                data-sort="asc"
+                onClick={(e) => sortItems(e)}
+                href="#"
+                className="font-medium text-gray-900 block px-4 py-2 text-sm"
+                role="menuitem"
+                tabIndex="-1"
+                id="menu-item-0"
+              >
+                Ascending
+              </a>
+              <a
+                data-sort="desc"
+                onClick={(e) => sortItems(e)}
+                href="#"
+                className="text-gray-500 block px-4 py-2 text-sm"
+                role="menuitem"
+                tabIndex="-1"
+                id="menu-item-1"
+              >
+                Descending
+              </a>
+            </div>
+          </div>
+        </div>
         {/* ********************************************************************************* */}
 
         <div className="w-4/5" style={{ width: "1500px" }}>
@@ -410,7 +288,11 @@ function ProductCard(props) {
                             height: "100%", // Occupy the full height of the container
                             objectFit: "cover", // Maintain aspect ratio and cover the container
                           }}
-                          src={`http://127.0.0.1:8000/images/${item.image}`}
+                          src={
+                            item.image.includes("https")
+                              ? `${item.image}`
+                              : `http://127.0.0.1:8000/images/${item.image}`
+                          }
                           alt="sofa-2"
                           className="group-hover:opacity-60 transition duration-500"
                         />

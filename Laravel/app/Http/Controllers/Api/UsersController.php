@@ -8,23 +8,30 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+ 
+    // public function index()
+    // {
+    //     return response()->json(User::get());
 
-    //  public function getUser(Request $request){
-    //       // Retrieve all categories from the database
-    //       $allUsers = User::all();
+    // }
 
-    //       // Return a JSON response with the list of all categories
-    //       return response([
-    //           'allUsers' => $allUsers,
-    //       ]);
-    //  }
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(User::get());
+        $perPage = $request->query('per_page', 10);
 
+        $users = User::paginate($perPage);
+
+        return response()->json([
+            'users' => $users->items(),
+            'pagination' => [
+                'total' => $users->total(),
+                'per_page' => $users->perPage(),
+                'current_page' => $users->currentPage(),
+                'last_page' => $users->lastPage(),
+                'from' => $users->firstItem(),
+                'to' => $users->lastItem(),
+            ],
+        ]);
     }
 
     /**

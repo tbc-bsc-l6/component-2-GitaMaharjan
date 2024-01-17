@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthsController extends Controller
 {
@@ -21,19 +22,44 @@ class AuthsController extends Controller
     {
         $validatedData = $request->validate([
             'fullname' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed'
+            'email' => 'required',
+            'password' => 'required'
         ]);
 
+        if (!str_contains($request->email, '@') || !str_contains($request->email, '.')) {
+            return response([
+                'message'=> 'Email should  be a valid email',
+                'status' => 'failed'
+            ]);
+        }
+        if(strlen($request->password) < 6 || !preg_match('/[0-9]/', $request->password) || !preg_match('/[a-zA-Z]/', $request->password)){
+            return response([
+                'message'=> 'password should be at least of length 6 and contain a digit and an alphabet',
+                'status' => 'failed'
+            ]);
+        }
+     
+
+        $data = [
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ];
+        
         // Check if email already exists
         $existingUser = User::where('email', $request->email)->first();
+        
         if ($existingUser) {
             return response([
                 'message' => 'Email already exists',
                 'status' => 'failed'
             ]);
         }
-
+        if($request->password_confirmation!=$request->password){
+            return response([
+                'message' => 'Your Password doesnt match.',
+                'status' => 'failed'
+            ]);
+        }
         // Create user
         $newUser = User::create([
             'fullname' => $request->fullname,
@@ -46,8 +72,9 @@ class AuthsController extends Controller
         // Generate and store API token
         $emailToken = User::where('email', $request->email)->first();
         $token = $emailToken->createToken($request->email)->plainTextToken;
+        $table = User::where('email', $request->email)->first()->toArray();
 
-        Token::create(['user_id' => $newUser->id, 'token_id' => $token]);
+        Token::create(['user_id' => $table['id'], 'token_id' => $token]);
 
         if ($newUser) {
             return response([
@@ -73,7 +100,9 @@ class AuthsController extends Controller
     $user = User::where('email', $request->email)->where('usertype', 'customer')->first();
 
     // Check if the user exists and the provided password is correct
-    if ($user && password_verify($request->password, $user->password)) {
+    if ($user &&  Hash::check($request->password, $user->password)){
+
+        
         // Generate a new API token for the user
         $token = $user->createToken($request->email)->plainTextToken;
 
@@ -126,64 +155,84 @@ class AuthsController extends Controller
         }
     }
 
+    // public function adminLogin(Request $request){
+    //     $val = $request->validate([
+    //         'email' => 'required|email|',
+    //         'password' => 'required',
+    //     ]);
+    //     $emailToken = User::where('email', $request->email)->where('usertype', "admin")->first();
+    //     if($emailToken && User::where(['password'=> $request->password,'email'=> $request->email])->first()){
+    //         $Usertable = User::where('email', $request->email)->first();
+    //         $id = $Usertable->id;
+    //     $token = $emailToken->createToken($request->email)->plainTextToken;
+    //     Token::create(['user_id'=>$id, 'token_id'=>$token]);
+    //         return response([
+    //             'message'=> 'User Successfully login',
+    //             'status'=> 'true',
+    //             'api_token' => $token,
+    //             'fullname'=>$Usertable->fullname,
+    //             'image' => 'static.jpg'
+    //         ],201);
+    //     }
+    //     else{
+    //         return response([
+    //             'email'=>$request->email,
+    //             'password'=>$request->password,
+
+    //         ]);
+    //     }
+    // }
+       
+    
     public function adminLogin(Request $request){
         $val = $request->validate([
-            'email' => 'required|email|',
+            'email' => 'required',
             'password' => 'required',
         ]);
-        $emailToken = User::where('email', $request->email)->where('usertype', "admin")->first();
-        if($emailToken && User::where(['password'=> $request->password,'email'=> $request->email])->first()){
+      
+        $emailToken = User::where('email', $request->email)->first();
+        if(!isset($emailToken)){
+            return response([
+                'message'=> "Login failed.Please try again.",
+                'status' => 'false',
+            ], 200);
+        }
+        $pass = $request->password;
+        if($emailToken->usertype == "superadmin"){
+            $pass = $request->password=== $emailToken->password ? true: false;
+        }
+        else if($emailToken->usertype == "admin"){
+            $pass = Hash::check($request->password, $emailToken->password);
+        }  else{
+            return response([
+                'message'=> "Login failed",
+                'status' => 'false',
+            ], 200);
+        }
+        
+
+        if($emailToken && $pass){
             $Usertable = User::where('email', $request->email)->first();
             $id = $Usertable->id;
         $token = $emailToken->createToken($request->email)->plainTextToken;
+        // Tokenall::where('user_Id',$id)->(['api_token'=> $token]);
         Token::create(['user_id'=>$id, 'token_id'=>$token]);
             return response([
                 'message'=> 'User Successfully login',
                 'status'=> 'true',
                 'api_token' => $token,
                 'fullname'=>$Usertable->fullname,
-                'image' => 'static.jpg'
+                'image' => 'p1.jpg',
+                'type'=> $Usertable->usertype
             ],201);
         }
         else{
             return response([
-                'email'=>$request->email,
-                'password'=>$request->password,
-
-            ]);
+                'message'=> "Login failed",
+                'status' => 'false',
+            ], 200);
         }
     }
-       
 
-    // public function adminLogin(Request $request) {
-    //     $validation = $request->validate([
-    //         'email' => 'required|email',
-    //         'password' => 'required',
-    //     ]);
-    
-    //     $tokenEntry = User::where('email', $request->email)->where('usertype', 'admin')->first();
-    
-    //     if ($tokenEntry && User::where('password', $request->password)) {
-    //         $userTable = User::where('email', $request->email)->first();
-    //         $userId = $userTable->id;
-    
-    //         $token = $tokenEntry->createToken($request->email)->plainTextToken;
-    //         Token::create(['user_id' => $userId, 'token_id' => $token]);
-    
-    //         return response([
-    //             'message' => 'User successfully logged in',
-    //             'status' => true,
-    //             'api_token' => $token,
-    //             'fullname' => $userTable->fullname,
-    //             'image' => 'static.jpg'
-    //         ], 201);
-    //     } else {
-    //         return response([
-    //             'message' => 'Login failed. Invalid credentials or user not authorized.',
-    //             'status' => false,
-    //         ], 200);
-    //     }
-    // }
-    
-
+ 
 }

@@ -42,13 +42,13 @@ const EditProduct = () => {
           if (isMounted) {
             // Update state or refs only if the component is still mounted
             setVar({
-              product_name: response.data.product.product_name,
-              product_price: response.data.product.product_price,
-              product_quantity: response.data.product.product_quantity,
-              product_description: response.data.product.product_description,
-              product_category: response.data.product.product_category,
-              product_discount: response.data.product.product_discount,
-              product_image: response.data.product.product_image,
+              product_name: response.data.product.name,
+              product_price: response.data.product.price,
+              product_quantity: response.data.product.quantity,
+              product_description: response.data.product.description,
+              product_category: response.data.product.category_id,
+              product_discount: response.data.product.discount_id,
+              product_image: response.data.product.image,
             });
           }
         } catch (error) {
@@ -85,9 +85,9 @@ const EditProduct = () => {
       userdata.append("product_description", vars.product_description);
       userdata.append("product_category", vars.product_category);
       userdata.append("product_discount", vars.product_discount);
-      userdata.append("pid", id);
+      userdata.append("product_id", id);
       userdata.append("product_image", image ? image : "");
-      // console.log(userdata);
+      //console.log(userdata);
       // try{
       axios
         .post("http://127.0.0.1:8000/api/update-products", userdata, {
@@ -98,15 +98,15 @@ const EditProduct = () => {
         .then((response) => {
           // if(response.data.status===true){
           console.log(response);
-          navigate("/dashboard/products");
+          //navigate("/dashboard/products");
         });
     }
   };
 
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/get-categories").then((response) => {
-      // console.log(response);
-      let arrPro = response.data.allcat;
+      console.log(response);
+      let arrPro = response.data.allCategories;
       setCategory(arrPro);
     });
   }, [updateCat]);
@@ -310,17 +310,19 @@ const EditProduct = () => {
                   <option value="" disabled>
                     Select
                   </option>
-                  {category.map((cat, index) => {
-                    return (
-                      <option
-                        className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        key={index}
-                        value={cat["id"]}
-                      >
-                        {cat["name"]}
-                      </option>
-                    );
-                  })}
+                  {category.length === 0
+                    ? ""
+                    : category.map((cat, index) => {
+                        return (
+                          <option
+                            className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            key={index}
+                            value={cat["id"]}
+                          >
+                            {cat["name"]}
+                          </option>
+                        );
+                      })}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg

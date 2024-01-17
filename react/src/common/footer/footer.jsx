@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/logo/goasis-white.png"
+import logo from "../../assets/logo/goasis-white.png";
 
 const Footer = () => {
   return (
@@ -14,27 +14,16 @@ const Footer = () => {
                     src={logo}
                     alt="logo"
                     className="max-w-full dark:hidden"
-                    style={{ marginTop: "-30px",marginLeft:"30px" }}
-
+                    style={{ marginTop: "-30px", marginLeft: "30px" }}
                   />
-                  {/* <img
-                    src={logo}
-                    alt="logo"
-                    className="max-w-full hidden dark:block"
-                  /> */}
                 </a>
                 <p className="mb-7 text-base text-body-color dark:text-dark-6">
-                Opulent Oasis Furniture: Where Elegance Meets Comfort.  Your Oasis of Sophistication Begins Here.
+                  Opulent Oasis Furniture: Where Elegance Meets Comfort. Your
+                  Oasis of Sophistication Begins Here.
                 </p>
                 <p className="flex items-center text-sm font-medium text-dark dark:text-white">
                   <span className="mr-3 text-primary">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                    >
-                  
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                       <defs>
                         <clipPath id="clip0_941_15626">
                           <rect width="20" height="20" fill="white" />
@@ -48,13 +37,11 @@ const Footer = () => {
             </div>
 
             <LinkGroup header="Resources">
-              <NavLink link="/#" label="SaaS Development" />
               <NavLink link="/#" label="Our Products" />
               <NavLink link="/#" label="User Flow" />
               <NavLink link="/#" label="User Strategy" />
             </LinkGroup>
             <LinkGroup header="Company">
-              <NavLink link="/#" label="About TailGrids" />
               <NavLink link="/#" label="Contact & Support" />
               <NavLink link="/#" label="Success History" />
               <NavLink link="/#" label="Setting & Privacy" />
@@ -63,7 +50,6 @@ const Footer = () => {
               <NavLink link="/#" label="Premium Support" />
               <NavLink link="/#" label="Our Services" />
               <NavLink link="/#" label="Know Our Team" />
-              <NavLink link="/#" label="Download App" />
             </LinkGroup>
 
             <div className="w-full px-4 sm:w-1/2 lg:w-3/12">

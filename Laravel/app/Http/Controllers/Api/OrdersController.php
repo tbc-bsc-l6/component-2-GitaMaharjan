@@ -125,9 +125,11 @@ class OrdersController extends Controller
     }
 
 
-    public function getOrdersForAdmin()
+    public function getOrdersForAdmin(Request $request)
     {
-        $orderItems = Orderitem::all();
+        $perPage = $request->has('per_page') ? $request->per_page : 5;
+
+        $orderItems = Orderitem::paginate($perPage);
         $ordersData = array();
     
         foreach ($orderItems as $key => $orderItem) {
@@ -141,6 +143,9 @@ class OrdersController extends Controller
             // 'ordersitem'=> $orderitems,
             'orders'=>$ordersData ,
             'orderItem'=> $orderItems
+
+            // 'orders' => $orderItems, // Send paginated data directly
+            // 'orderItem' => $ordersData, // Keep the additional data if needed
         ]);
     }
 

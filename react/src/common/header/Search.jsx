@@ -1,28 +1,29 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaSignInAlt } from "react-icons/fa";
+
 import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSearch } from "react-icons/fa";
-import logo from "../../assets/logo/goasis-black.png";
+import logo from "../../assets/logo/goasis-white.png";
 import "./Header.css";
 import axios from "axios";
 
 const Search = () => {
   const nav = useNavigate();
   const [search, setSearch] = useState("");
+
   const changeTerm = (e) => {
     setSearch(e.target.value);
   };
+
   function searchItem(e) {
     if (e.key === "Enter") {
       nav(`/search/` + search);
     }
   }
 
-  /**************************** */
   const [hide, setHide] = useState(false);
 
   const [quantity, setQuantity] = useState(0);
@@ -49,35 +50,31 @@ const Search = () => {
 
   return (
     <>
-      <section className="search">
+      <section className="search bg-[#1f2b40] py-2">
         <div className="container c_flex">
           <Link to="/home" className="logo width ">
             <img src={logo} alt="" />
           </Link>
           {/*  */}
-          <div className="search-box f_flex">
-            <FaSearch className="icon" />
-            <input
-              value={search}
-              onChange={(e) => {
-                changeTerm(e);
-              }}
-              onKeyUp={(e) => searchItem(e)}
-              type="text"
-              placeholder="Search and hit enter..."
-            />
-            <span>All Category</span>
-          </div>
-          {/*  */}
+
+          <input
+            value={search}
+            onChange={(e) => changeTerm(e)}
+            onKeyUp={(e) => searchItem(e)}
+            type="text"
+            placeholder="Search and hit enter..."
+            className="p-1 m-10 bg-blue-100"
+          />
+          <FaSearch className="icon" style={{ color: "white" }} />
 
           <div className="flex flex-row justify-between md:gap-[1.5em] gap-[1em] items-center">
             {userLogin.token === "" ? (
               <Link className="hover:text-red-500 duration-[0.6s]" to="/signin">
                 <button
                   type="button"
-                  className="bg-[#1da1f2] text-white inline-flex pl-3.5 pr-5 py-2 duration-[0.5] hover:bg-[#59bbf8] font-medium rounded-md items-center text-sm space-x-3 text-[16px"
+                  className=" bg-[#b8cff5] hover:bg-pink-200 text-white inline-flex pl-2 pr-3 py-1 duration-300 font-medium rounded-md items-center text-sm space-x-1 focus:outline-none focus:ring focus:border-pink-300"
                 >
-                  <span>Sign In</span>
+                  <FaSignInAlt className="text-lg " />
                 </button>
               </Link>
             ) : (
@@ -93,28 +90,16 @@ const Search = () => {
               </Link>
             )}
             <Link
-              className="hover:text-green-500 duration-[0.6s]"
+              className="hover:text-green-500 duration-[0.6s] flex flex-row items-center"
               to="/cartpage"
             >
-              <FontAwesomeIcon className="text-[1.5rem]" icon={faShoppingBag} />
-              <span className="rounded text-[16px] text-green-500">
-                {quantity}
-              </span>
+              <span className="rounded text-[16px] text-white">{quantity}</span>
+              <FontAwesomeIcon
+                className="text-[1.5rem]"
+                icon={faShoppingBag}
+                style={{ color: "white" }}
+              />
             </Link>
-            <FontAwesomeIcon
-              onClick={() => {
-                setHide(!hide);
-              }}
-              className={`w-8 h-8 md:hidden ${hide ? "hidden" : "block"}`}
-              icon={faBars}
-            />
-            <FontAwesomeIcon
-              onClick={() => {
-                setHide(!hide);
-              }}
-              className={`w-8 h-8 md:hidden ${hide ? "block" : "hidden"}`}
-              icon={faXmark}
-            />
           </div>
         </div>
       </section>

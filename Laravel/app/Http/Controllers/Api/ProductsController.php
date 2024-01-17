@@ -106,7 +106,9 @@ class ProductsController extends Controller
 
         // Update the product record in the database with the new data
         $result = Product::where('id', $productId)->update($updatedProductData);
-
+        return response([
+            "result"=> $updatedProductData,
+        ]);
         // Check if an image file is provided in the request
         // if ($request->hasFile('product_image')) {
             if($request->product_image != ""){
@@ -138,10 +140,13 @@ class ProductsController extends Controller
     public function getProducts()
 {
     // Retrieve all products from the database, ordered by ID in descending order
+    //$products = Product::orderBy("id", "desc")->get()->toArray();
     $products = Product::orderBy("id", "desc")->get()->toArray();
 
+   
     // Initialize an empty result array
     $result = [];
+    // $query =Product
 
     // Iterate through each product in the retrieved array
     foreach ($products as $key => $product) {

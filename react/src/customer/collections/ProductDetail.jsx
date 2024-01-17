@@ -117,7 +117,17 @@ const ProductDetail = () => {
         <div className="mb-8 md:mb-0 w-full md:w-1/2">
           <div className="relative w-full h-96 overflow-hidden">
             <img
+              // src={
+              //   product.productimage.includes("https")
+              //     ? `${product.productimage}`
+              //     : `http://127.0.0.1:8000/images/${product.productimage}`
+              // }
               src={`http://127.0.0.1:8000/images/${product.productimage}`}
+              // src={
+              //   product.productimage.includes("https")
+              //     ? `${product.productimage}`
+              //     : `http://127.0.0.1:8000/images/${product.productimage}`
+              // }
               alt=""
               className="object-cover w-full h-full rounded-lg shadow-lg"
             />

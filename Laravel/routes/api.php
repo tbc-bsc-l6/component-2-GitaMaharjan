@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\CartsController;
 use App\Http\Controllers\Api\FrontendsController;
 use App\Http\Controllers\Api\OrdersController;
 use App\Http\Controllers\Api\FiltersController;
+use App\Http\Controllers\Api\AdministrationController;
+
 
 
 
@@ -103,3 +105,28 @@ Route::get("/get-order-admin", [OrdersController::class, "getOrdersForAdmin"]);
 Route::post("/get_filter_products", [FiltersController::class, "get_filter_products"]);
 
 Route::post("/get_searched_product", [FiltersController::class, "get_searched_products"]);
+
+//******************************************************** */
+
+
+Route::group(['middleware' => 'userrestrict'], function () {
+
+Route::get("/get_users_admin", [AdministrationController::class, 'get_users_admin']);
+
+Route::get("/get_user_admin/{id}", [AdministrationController::class, 'get_user_admin']);
+
+
+Route::post("/create_user_admin", [AdministrationController::class, 'create_user_admin']);
+
+Route::put("/edit_user_admin", [AdministrationController::class, 'edit_user_admin']);
+
+Route::put("/reset_user_admin", [AdministrationController::class, 'reset_user_admin']);
+
+Route::delete("/delete_user_admin/{id}", [AdministrationController::class, 'delete_user_admin']);
+
+Route::get("/get_users_customer", [AdministrationController::class, 'get_users_customer']);
+
+Route::get("/get_users_admin", [AdministrationController::class, 'get_users_admin']);
+
+Route::get("/get_user_admin/{id}", [AdministrationController::class, 'get_user_admin']);
+});
